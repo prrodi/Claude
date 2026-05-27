@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Apex Auto Detailing</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .page-hero-bg { background:linear-gradient(145deg,#0e0e0e,#1a1a1a,#0b0b0b); }
+    .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .story-ph   { height:480px; border-radius:8px; background:linear-gradient(145deg,#111,#1e1e1e,#0f0f0f); display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--w-15); }
+    .values-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .value-card { background:var(--bg-2); border:1px solid var(--bdr); border-radius:8px; padding:2rem; transition:all .28s var(--ease); }
+    .value-card:hover { border-color:var(--bdr-gd); transform:translateY(-4px); }
+    .value-ico  { font-size:1.75rem; margin-bottom:1rem; }
+    .value-title{ font-family:'Bebas Neue',sans-serif; font-size:1.45rem; letter-spacing:.04em; margin-bottom:.55rem; }
+    .value-desc { font-size:.875rem; color:var(--w-55); line-height:1.75; font-weight:300; }
+    .team-grid  { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .team-card  { background:var(--bg-2); border:1px solid var(--bdr); border-radius:8px; overflow:hidden; transition:all .28s var(--ease); }
+    .team-card:hover { border-color:var(--bdr-gd); transform:translateY(-4px); }
+    .team-ph    { height:260px; background:linear-gradient(145deg,#161616,#222,#111); display:flex;align-items:flex-end;justify-content:flex-start;padding:1.25rem; font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--w-20); }
+    .team-info  { padding:1.5rem; }
+    .team-name  { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.04em; margin-bottom:.2rem; }
+    .team-role  { font-size:.72rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+    .team-bio   { font-size:.85rem; color:var(--w-55); line-height:1.72; font-weight:300; margin-top:.75rem; }
+    .cert-grid  { display:grid; grid-template-columns:repeat(4,1fr); gap:1.25rem; }
+    .cert-card  { background:var(--bg-2); border:1px solid var(--bdr); border-radius:8px; padding:1.5rem; text-align:center; transition:all .28s var(--ease); }
+    .cert-card:hover { border-color:var(--bdr-gd); }
+    .cert-logo  { font-size:1.5rem; margin-bottom:.75rem; }
+    .cert-name  { font-size:.8rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.25rem; }
+    .cert-desc  { font-size:.78rem; color:var(--w-50); font-weight:300; }
+    @media(max-width:1024px){
+      .story-grid { grid-template-columns:1fr; }
+      .values-grid{ grid-template-columns:repeat(2,1fr); }
+      .team-grid  { grid-template-columns:repeat(2,1fr); }
+      .cert-grid  { grid-template-columns:repeat(2,1fr); }
+    }
+    @media(max-width:768px){
+      .values-grid{ grid-template-columns:1fr; }
+      .team-grid  { grid-template-columns:1fr; }
+      .cert-grid  { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-main">APEX <span>AUTO</span></div><div class="logo-sub">Detailing Studio</div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="services.html">Services</a>
+      <a href="gallery.html">Gallery</a><a href="about.html" class="active">About</a>
+      <a href="contact.html" class="nav-cta">Book Now</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></div>
+</nav>
+<nav class="mob-nav" id="mobNav">
+  <a href="index.html">Home</a><a href="services.html">Services</a>
+  <a href="gallery.html">Gallery</a><a href="about.html">About</a><a href="contact.html">Book Now</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-ov"></div>
+  <div class="container">
+    <span class="label">The Studio</span>
+    <h1 class="page-h1">Our<br>Story.</h1>
+  </div>
+</div>
+
+<!-- STORY -->
+<section style="background:var(--bg)">
+  <div class="container">
+    <div class="story-grid">
+      <div class="reveal-l">
+        <span class="label">Founded 2016</span>
+        <h2 class="sec-title">Built on<br>Obsession.</h2>
+        <div class="g-line"></div>
+        <p style="font-size:1rem;color:var(--w-60);line-height:1.82;font-weight:300;margin-bottom:1.5rem">
+          Apex Auto Detailing was founded on a simple belief: that a vehicle isn't just transportation — it's an investment, a passion, and a reflection of its owner's standards.
+        </p>
+        <p style="font-size:1rem;color:var(--w-60);line-height:1.82;font-weight:300;margin-bottom:1.5rem">
+          What started as a solo operation in a rented garage has grown into Los Angeles' most trusted luxury detailing studio. Eight years, 500+ vehicles, and a reputation built on nothing but results.
+        </p>
+        <p style="font-size:1rem;color:var(--w-60);line-height:1.82;font-weight:300">
+          We don't take on every vehicle. We take on the ones we can truly do justice to — and we treat every single one as if it were our own.
+        </p>
+      </div>
+      <div class="reveal-r"><div class="story-ph">Studio Interior</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section style="background:var(--bg-1)">
+  <div class="container">
+    <div style="max-width:860px;margin:0 auto;text-align:center" class="reveal">
+      <span class="label" style="justify-content:center">Our Mission</span>
+      <h2 class="sec-title" style="margin-bottom:2rem">We Treat Vehicles<br>Like Works of Art.</h2>
+      <p style="font-size:1.15rem;color:var(--w-60);line-height:1.85;font-weight:300;margin-bottom:1.5rem">
+        Precision is not a selling point for us — it's a minimum standard. Every detail matters: the angle of the polishing pad, the temperature of the ceramic cure, the final inspection under studio lighting. We obsess over the things most people never notice — because that's what separates good from exceptional.
+      </p>
+      <p style="font-size:1.15rem;color:var(--w-60);line-height:1.85;font-weight:300">
+        Our mission is simple: to provide the finest automotive detailing experience available, delivered with transparency, expertise, and an uncompromising commitment to perfection.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="background:var(--bg)">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="label">What Drives Us</span>
+      <h2 class="sec-title">Our Values</h2>
+    </div>
+    <div class="values-grid stagger">
+      <div class="value-card">
+        <div class="value-ico">🎯</div>
+        <div class="value-title">Precision First</div>
+        <p class="value-desc">We measure paint depth before we touch it. We map every defect before we correct it. Precision is not an option — it's our operating system.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ico">🔒</div>
+        <div class="value-title">Total Accountability</div>
+        <p class="value-desc">Your vehicle is in our care. We treat that responsibility seriously — every car is fully insured, handled with care, and returned better than we received it.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ico">📐</div>
+        <div class="value-title">No Shortcuts</div>
+        <p class="value-desc">We never rush. We never cut corners. The right process takes the time it takes — and the result always shows why that matters.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ico">📚</div>
+        <div class="value-title">Continuous Learning</div>
+        <p class="value-desc">The detailing industry evolves. Our team regularly trains with Ceramic Pro, Gyeon, and Koch-Chemie to stay at the absolute forefront of the craft.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ico">🤝</div>
+        <div class="value-title">Client Partnership</div>
+        <p class="value-desc">We don't just detail cars — we educate owners. Our clients leave knowing exactly how to maintain their vehicle's finish between visits.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-ico">🏆</div>
+        <div class="value-title">Results Over Promises</div>
+        <p class="value-desc">We let the work do the talking. Our reputation is built on results, not marketing. Every vehicle we deliver is our best advertisement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section style="background:var(--bg-1)">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="label">The People</span>
+      <h2 class="sec-title">Meet the Team</h2>
+      <p class="sec-sub">Every technician at Apex is IDA-certified, manufacturer-trained, and obsessively passionate about their craft.</p>
+    </div>
+    <div class="team-grid stagger">
+      <div class="team-card">
+        <div class="team-ph">Lead Detailer</div>
+        <div class="team-info">
+          <div class="team-name">Marcus Reeves</div>
+          <div class="team-role">Founder & Master Detailer</div>
+          <p class="team-bio">8 years of professional detailing experience. Ceramic Pro certified, IDA member, and veteran of 200+ exotic vehicle details. Founded Apex to redefine the standard.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-ph">Paint Specialist</div>
+        <div class="team-info">
+          <div class="team-name">Elena Torres</div>
+          <div class="team-role">Paint Correction Specialist</div>
+          <p class="team-bio">Former automotive refinishing technician. Specializes in multi-stage paint correction and has a deep understanding of every paint type — from factory to PPF wraps.</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-ph">Interior Specialist</div>
+        <div class="team-info">
+          <div class="team-name">James Okafor</div>
+          <div class="team-role">Interior Detailing Specialist</div>
+          <p class="team-bio">Certified in leather care, alcantara treatment, and steam extraction. James has transformed interiors in some of the rarest vehicles to pass through LA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="background:var(--bg-2)">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="label">Our Credentials</span>
+      <h2 class="sec-title">Certified Excellence</h2>
+      <p class="sec-sub">We only use products we're officially certified to apply — ensuring every coating is backed by manufacturer warranty.</p>
+    </div>
+    <div class="cert-grid stagger">
+      <div class="cert-card">
+        <div class="cert-logo">💎</div>
+        <div class="cert-name">Ceramic Pro</div>
+        <p class="cert-desc">Authorized Ceramic Pro installer. Official warranty-backed application.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">🛡️</div>
+        <div class="cert-name">Gyeon Quartz</div>
+        <p class="cert-desc">Certified Gyeon detailer with access to the professional product range.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">🏅</div>
+        <div class="cert-name">IDA Member</div>
+        <p class="cert-desc">International Detailing Association certified professionals on staff.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">⭐</div>
+        <div class="cert-name">XPEL Authorized</div>
+        <p class="cert-desc">Authorized XPEL dealer for Paint Protection Film installations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:7rem 0;background:var(--bg);text-align:center">
+  <div class="container reveal">
+    <span class="label" style="justify-content:center">Work With Us</span>
+    <h2 class="sec-title" style="margin-bottom:1.25rem">Ready to Experience<br>the Apex Standard?</h2>
+    <p class="sec-sub" style="margin:0 auto 2.5rem">Book your appointment today. Limited availability — we only take on as many vehicles as we can detail properly.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="contact.html" class="btn btn-gold">Book Appointment <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a href="services.html" class="btn btn-outline">View Services</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container">
+  <div class="foot-grid">
+    <div class="foot-brand"><a href="index.html" class="logo"><div class="logo-main">APEX <span>AUTO</span></div><div class="logo-sub">Detailing Studio</div></a><p>Los Angeles' premier luxury car detailing studio.</p>
+    <div class="socials"><div class="soc"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div></div></div>
+    <div><div class="foot-col-h">Services</div><ul class="foot-links"><li><a href="services.html">Ceramic Coating</a></li><li><a href="services.html">Paint Correction</a></li><li><a href="services.html">Interior Detail</a></li></ul></div>
+    <div><div class="foot-col-h">Studio</div><ul class="foot-links"><li><a href="about.html">About</a></li><li><a href="gallery.html">Portfolio</a></li><li><a href="contact.html">Book Now</a></li></ul></div>
+    <div><div class="foot-col-h">Contact</div><ul class="foot-links"><li><a href="tel:+13235550184">(323) 555-0184</a></li><li><a href="mailto:studio@apexauto.com">studio@apexauto.com</a></li></ul></div>
+  </div>
+  <div class="foot-bottom"><p class="foot-copy">© 2024 Apex Auto Detailing.</p><div class="foot-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+</div></footer>
+<script src="js/main.js"></script>
+</body>
+</html>
