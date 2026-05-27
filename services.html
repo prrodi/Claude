@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Apex Auto Detailing</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .page-hero-bg { background:linear-gradient(145deg,#0c0c0c 0%,#161616 50%,#0a0a0a 100%); }
+
+    /* Service detail sections */
+    .svc-detail { padding:7rem 0; }
+    .svc-detail:nth-child(even) { background:var(--bg-1); }
+    .svc-layout { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .svc-layout.reverse { direction:rtl; }
+    .svc-layout.reverse > * { direction:ltr; }
+
+    .svc-ph {
+      height:440px; border-radius:8px; overflow:hidden; position:relative;
+      background:var(--bg-3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.65rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--w-15);
+    }
+    .svc-ph::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(201,150,63,.06) 0%,transparent 60%);
+    }
+
+    .svc-ph-1 { background:linear-gradient(145deg,#111,#1e1e1e,#0f0f0f); }
+    .svc-ph-2 { background:linear-gradient(145deg,#0d0d0d,#1a1a1a,#101010); }
+    .svc-ph-3 { background:linear-gradient(145deg,#141414,#202020,#111); }
+    .svc-ph-4 { background:linear-gradient(145deg,#0f0f0f,#1c1c1c,#0d0d0d); }
+    .svc-ph-5 { background:linear-gradient(145deg,#131313,#1f1f1f,#101010); }
+    .svc-ph-6 { background:linear-gradient(145deg,#0c0c0c,#181818,#0a0a0a); }
+
+    .svc-meta { display:flex; gap:2rem; margin:1.75rem 0; flex-wrap:wrap; }
+    .svc-meta-item { }
+    .svc-meta-label { font-size:.6rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--w-35); margin-bottom:.2rem; }
+    .svc-meta-value { font-size:.9rem; font-weight:600; color:var(--w-80); }
+
+    .svc-features { margin:1.5rem 0 2rem; display:flex; flex-direction:column; gap:.6rem; }
+    .svc-feat { display:flex; align-items:center; gap:.75rem; font-size:.9rem; color:var(--w-60); font-weight:300; }
+    .svc-feat::before { content:''; width:18px; height:1px; background:var(--gold); flex-shrink:0; }
+
+    /* pricing section */
+    .pricing { background:var(--bg-2); }
+    .price-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; margin-top:3.5rem; align-items:start; }
+    .price-card {
+      background:var(--bg-3); border:1px solid var(--bdr); border-radius:10px;
+      padding:2.25rem 1.9rem; position:relative; transition:transform .28s;
+    }
+    .price-card:hover { transform:translateY(-4px); }
+    .price-card.feat  {
+      border-color:var(--gold); transform:translateY(-10px);
+      box-shadow:0 0 50px rgba(201,150,63,.12), 0 0 0 1px rgba(201,150,63,.08);
+    }
+    .price-card.feat:hover { transform:translateY(-14px); }
+    .price-tier { font-size:.7rem; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; }
+    .price-val  { display:flex; align-items:flex-start; gap:.2rem; margin-bottom:.4rem; }
+    .price-sign { font-size:1.4rem; font-weight:600; color:var(--w-50); margin-top:.55rem; }
+    .price-num  { font-family:'Bebas Neue',sans-serif; font-size:4.2rem; line-height:1; }
+    .price-note { font-size:.8rem; color:var(--w-50); margin-bottom:1.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--bdr); }
+    .price-feats{ list-style:none; margin-bottom:1.75rem; display:flex; flex-direction:column; gap:.6rem; }
+    .price-feats li { display:flex; gap:.65rem; font-size:.875rem; color:var(--w-55); }
+    .price-feats li::before { content:'—'; color:var(--gold); font-weight:700; flex-shrink:0; }
+
+    /* faq */
+    .faq-wrap { max-width:760px; margin:3rem auto 0; }
+
+    @media(max-width:1024px){
+      .svc-layout { grid-template-columns:1fr; gap:3rem; }
+      .svc-layout.reverse { direction:ltr; }
+      .price-grid { grid-template-columns:1fr; max-width:400px; margin-inline:auto; }
+      .price-card.feat { transform:none; }
+    }
+    @media(max-width:768px){ .svc-ph { height:280px; } }
+  </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="container"><div class="nav-inner">
+    <a href="index.html" class="logo"><div class="logo-main">APEX <span>AUTO</span></div><div class="logo-sub">Detailing Studio</div></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Book Now</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></div>
+</nav>
+<nav class="mob-nav" id="mobNav">
+  <a href="index.html">Home</a><a href="services.html">Services</a>
+  <a href="gallery.html">Gallery</a><a href="about.html">About</a><a href="contact.html">Book Now</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="padding-top:var(--nav-h)">
+  <div class="page-hero-bg svc-ph-1"></div>
+  <div class="page-hero-ov"></div>
+  <div class="container">
+    <span class="label">What We Offer</span>
+    <h1 class="page-h1">Our<br>Services</h1>
+  </div>
+</div>
+
+<!-- CERAMIC COATING -->
+<section class="svc-detail" id="ceramic">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal-l">
+        <span class="label">Ultimate Protection</span>
+        <h2 class="sec-title">Ceramic<br>Coating</h2>
+        <div class="g-line"></div>
+        <p style="font-size:.95rem;color:var(--w-60);line-height:1.8;font-weight:300;margin-bottom:1.25rem">
+          Ceramic coating is the gold standard of paint protection. A semi-permanent nano-ceramic layer chemically bonds to your vehicle's clear coat, creating a hydrophobic, UV-resistant shield that lasts for years — not weeks.
+        </p>
+        <div class="svc-meta">
+          <div class="svc-meta-item"><div class="svc-meta-label">Duration</div><div class="svc-meta-value">1–2 Days</div></div>
+          <div class="svc-meta-item"><div class="svc-meta-label">Protection</div><div class="svc-meta-value">2–5 Years</div></div>
+          <div class="svc-meta-item"><div class="svc-meta-label">Frequency</div><div class="svc-meta-value">Once</div></div>
+        </div>
+        <div class="svc-features">
+          <div class="svc-feat">9H hardness nano-ceramic formula</div>
+          <div class="svc-feat">Hydrophobic water beading</div>
+          <div class="svc-feat">UV protection & oxidation resistance</div>
+          <div class="svc-feat">Chemical contaminant resistance</div>
+          <div class="svc-feat">Mirror-like gloss enhancement</div>
+          <div class="svc-feat">Professional curing under controlled conditions</div>
+        </div>
+        <a href="contact.html" class="btn btn-gold">Book This Service</a>
+      </div>
+      <div class="reveal-r"><div class="svc-ph svc-ph-1">Ceramic Coating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAINT CORRECTION -->
+<section class="svc-detail" id="paint-correction">
+  <div class="container">
+    <div class="svc-layout reverse">
+      <div class="reveal-r">
+        <span class="label">Defect Elimination</span>
+        <h2 class="sec-title">Paint<br>Correction</h2>
+        <div class="g-line"></div>
+        <p style="font-size:.95rem;color:var(--w-60);line-height:1.8;font-weight:300;margin-bottom:1.25rem">
+          Paint correction is the art of restoring a vehicle's finish to perfection through precision machine polishing. Every swirl mark, light scratch, water spot, and oxidation blemish is systematically removed — revealing the true depth and clarity of your paint.
+        </p>
+        <div class="svc-meta">
+          <div class="svc-meta-item"><div class="svc-meta-label">Duration</div><div class="svc-meta-value">6–16 Hours</div></div>
+          <div class="svc-meta-item"><div class="svc-meta-label">Correction</div><div class="svc-meta-value">Up to 98%</div></div>
+          <div class="svc-meta-item"><div class="svc-meta-label">Frequency</div><div class="svc-meta-value">As Needed</div></div>
+        </div>
+        <div class="svc-features">
+          <div class="svc-feat">Paint depth gauge measurement</div>
+          <div class="svc-feat">Dual-LED defect mapping</div>
+          <div class="svc-feat">1-stage, 2-stage, or 3-stage correction</div>
+          <div class="svc-feat">Swirl marks & scratch elimination</div>
+          <div class="svc-feat">Water spot & oxidation removal</div>
+          <div class="svc-feat">Restore clarity and paint depth</div>
+        </div>
+        <a href="contact.html" class="btn btn-gold">Book This Service</a>
+      </div>
+      <div class="reveal-l"><div class="svc-ph svc-ph-2">Paint Correction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERIOR DETAILING -->
+<section class="svc-detail" id="interior">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal-l">
+        <span class="label">Cabin Restoration</span>
+        <h2 class="sec-title">Interior<br>Detailing</h2>
+        <div class="g-line"></div>
+        <p style="font-size:.95rem;color:var(--w-60);line-height:1.8;font-weight:300;margin-bottom:1.25rem">
+          The interior of a luxury vehicle deserves the same level of care as the exterior. Our interior detailing service uses steam extraction, pH-neutral cleaners, and material-specific treatments to restore every surface to pristine condition.
+        </p>
+        <div class="svc-meta">
+          <div class="svc-meta-item"><div class="svc-meta-label">Duration</div><div class="svc-meta-value">3–6 Hours</div></div>
+          <div class="svc-meta-item"><div class="svc-meta-label">Recommended</div><div class="svc-meta-value">Quarterly</div></div>
+        </div>
+        <div class="svc-features">
+          <div class="svc-feat">Full leather cleaning & conditioning</div>
+          <div class="svc-feat">Alcantara & fabric steam extraction</div>
+          <div class="svc-feat">Carbon fiber & trim detailing</div>
+          <div class="svc-feat">Deep vent & crevice cleaning</div>
+          <div class="svc-feat">Odor elimination treatment</div>
+          <div class="svc-feat">Window & mirror interior polish</div>
+        </div>
+        <a href="contact.html" class="btn btn-gold">Book This Service</a>
+      </div>
+      <div class="reveal-r"><div class="svc-ph svc-ph-3">Interior Detail</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTERIOR DETAILING -->
+<section class="svc-detail" id="exterior">
+  <div class="container">
+    <div class="svc-layout reverse">
+      <div class="reveal-r">
+        <span class="label">Surface Perfection</span>
+        <h2 class="sec-title">Exterior<br>Detailing</h2>
+        <div class="g-line"></div>
+        <p style="font-size:.95rem;color:var(--w-60);line-height:1.8;font-weight:300;margin-bottom:1.25rem">
+          A comprehensive exterior detail goes far beyond a car wash. We systematically decontaminate, correct, and protect every exterior surface — from paint and glass to wheels and trim — leaving your vehicle flawless from every angle.
+        </p>
+        <div class="svc-meta">
+          <div class="svc-meta-item"><div class="svc-meta-label">Duration</div><div class="svc-meta-value">3–5 Hours</div></div>
+          <div class="svc-meta-item"><div class="svc-meta-label">Recommended</div><div class="svc-meta-value">Monthly</div></div>
+        </div>
+        <div class="svc-features">
+          <div class="svc-feat">Foam pre-wash & snow foam decontamination</div>
+          <div class="svc-feat">Two-bucket hand wash method</div>
+          <div class="svc-feat">Iron fallout & tar removal</div>
+          <div class="svc-feat">Clay bar decontamination</div>
+          <div class="svc-feat">Carnauba or SiO2 wax application</div>
+          <div class="svc-feat">Wheel, tire & exhaust tip detailing</div>
+        </div>
+        <a href="contact.html" class="btn btn-gold">Book This Service</a>
+      </div>
+      <div class="reveal-l"><div class="svc-ph svc-ph-4">Exterior Detail</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGINE BAY + HEADLIGHTS -->
+<section class="svc-detail" id="additional">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal-l">
+        <span class="label">Additional Services</span>
+        <h2 class="sec-title">Engine &<br>Headlights</h2>
+        <div class="g-line"></div>
+        <p style="font-size:.95rem;color:var(--w-60);line-height:1.8;font-weight:300;margin-bottom:1.5rem">
+          Complete care extends beyond the paint. Our engine bay detailing and headlight restoration services address the areas most often overlooked — yet most noticed by true enthusiasts.
+        </p>
+        <div style="background:var(--bg-3);border:1px solid var(--bdr);border-radius:8px;padding:1.5rem;margin-bottom:1rem;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;margin-bottom:.5rem">Engine Bay Detailing</div>
+          <p style="font-size:.875rem;color:var(--w-55);line-height:1.75;font-weight:300">Professional degreasing, cleaning, and dressing of all engine bay components — returning that factory-fresh appearance under the hood.</p>
+        </div>
+        <div style="background:var(--bg-3);border:1px solid var(--bdr);border-radius:8px;padding:1.5rem;margin-bottom:1.75rem;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.04em;margin-bottom:.5rem">Headlight Restoration</div>
+          <p style="font-size:.875rem;color:var(--w-55);line-height:1.75;font-weight:300">Multi-step wet sanding and polishing to eliminate yellowing, oxidation, and hazing — restoring clarity and improving night visibility by up to 70%.</p>
+        </div>
+        <a href="contact.html" class="btn btn-gold">Book This Service</a>
+      </div>
+      <div class="reveal-r">
+        <div class="svc-ph svc-ph-5" style="height:220px;border-radius:8px;margin-bottom:1rem">Engine Bay</div>
+        <div class="svc-ph svc-ph-6" style="height:200px;border-radius:8px">Headlights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="label">Transparent Pricing</span>
+      <h2 class="sec-title">Choose Your<br>Package</h2>
+      <p class="sec-sub">No hidden fees. No surprises. Every package is clearly defined so you know exactly what your vehicle receives.</p>
+    </div>
+    <div class="price-grid stagger">
+      <div class="price-card">
+        <div class="price-tier">Signature</div>
+        <div class="price-val"><span class="price-sign">$</span><span class="price-num">149</span></div>
+        <p class="price-note">Exterior and interior refresh for regular maintenance.</p>
+        <ul class="price-feats">
+          <li>Foam pre-wash + hand wash</li>
+          <li>Clay bar decontamination</li>
+          <li>Carnauba wax application</li>
+          <li>Interior vacuum + wipe-down</li>
+          <li>Window cleaning (in & out)</li>
+          <li>Tire & rim dressing</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline btn-full">Book Now</a>
+      </div>
+      <div class="price-card feat">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Prestige</div>
+        <div class="price-val"><span class="price-sign">$</span><span class="price-num">399</span></div>
+        <p class="price-note">The comprehensive detail for vehicles that deserve the best.</p>
+        <ul class="price-feats">
+          <li>Everything in Signature</li>
+          <li>1-stage paint correction</li>
+          <li>SiO2 sealant application</li>
+          <li>Interior steam cleaning</li>
+          <li>Leather conditioning</li>
+          <li>Engine bay detail</li>
+          <li>Headlight restoration</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold btn-full">Book Now</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Concours</div>
+        <div class="price-val"><span class="price-sign">$</span><span class="price-num">799</span></div>
+        <p class="price-note">The ultimate treatment. Reserved for those who demand perfection.</p>
+        <ul class="price-feats">
+          <li>Everything in Prestige</li>
+          <li>Multi-stage paint correction</li>
+          <li>Ceramic coating (3-year)</li>
+          <li>Full interior deep clean</li>
+          <li>Alcantara treatment</li>
+          <li>Exhaust tip polishing</li>
+          <li>Final inspection walkthrough</li>
+        </ul>
+        <a href="contact.html" class="btn btn-outline btn-full">Book Now</a>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.8rem;color:var(--w-35);margin-top:2rem;font-weight:300">
+      Exotic vehicle pricing may vary. Contact us for a personalized quote.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding:7rem 0;background:var(--bg)">
+  <div class="container">
+    <div class="sec-head center reveal">
+      <span class="label">Questions</span>
+      <h2 class="sec-title">Frequently Asked</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item"><div class="faq-q">How long does paint correction take?<div class="faq-ico">+</div></div><div class="faq-a"><div class="faq-a-in">Depending on the level of correction required and the size of the vehicle, paint correction typically takes 6–16 hours. Severe cases or very large vehicles may require a second day. We always assess the paint beforehand and give you a realistic timeline.</div></div></div>
+      <div class="faq-item"><div class="faq-q">How long does ceramic coating last?<div class="faq-ico">+</div></div><div class="faq-a"><div class="faq-a-in">Our ceramic coatings range from 2-year to 5-year protection depending on the product selected. Longevity is also influenced by maintenance. We recommend a maintenance wash every 4–6 weeks and an annual inspection.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Is my exotic car safe in your hands?<div class="faq-ico">+</div></div><div class="faq-a"><div class="faq-a-in">Absolutely. We have extensive experience with Ferrari, Lamborghini, McLaren, Rolls-Royce, Bentley, Porsche, and other exotic marques. Our technicians are trained in exotic-specific protocols, and every vehicle is fully insured while in our care.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Do I need paint correction before ceramic coating?<div class="faq-ico">+</div></div><div class="faq-a"><div class="faq-a-in">Yes — ceramic coating locks in the current condition of your paint. Applying it over scratches or swirls would seal those defects permanently. We always recommend at least a 1-stage polish before ceramic coating to ensure the best possible result.</div></div></div>
+      <div class="faq-item"><div class="faq-q">Do you offer a satisfaction guarantee?<div class="faq-ico">+</div></div><div class="faq-a"><div class="faq-a-in">Yes. Every service is backed by our satisfaction guarantee. If you're not completely satisfied with any aspect of our work, contact us within 48 hours and we will address it immediately at no cost to you.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="index.html" class="logo"><div class="logo-main">APEX <span>AUTO</span></div><div class="logo-sub">Detailing Studio</div></a>
+        <p>Los Angeles' premier luxury car detailing studio. We treat every vehicle like a work of art.</p>
+        <div class="socials">
+          <div class="soc"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+          <div class="soc"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+          <div class="soc"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
+        </div>
+      </div>
+      <div><div class="foot-col-h">Services</div><ul class="foot-links"><li><a href="#ceramic">Ceramic Coating</a></li><li><a href="#paint-correction">Paint Correction</a></li><li><a href="#interior">Interior Detailing</a></li><li><a href="#exterior">Exterior Detailing</a></li><li><a href="#additional">Engine Bay</a></li></ul></div>
+      <div><div class="foot-col-h">Studio</div><ul class="foot-links"><li><a href="about.html">About Apex</a></li><li><a href="gallery.html">Portfolio</a></li><li><a href="contact.html">Book Now</a></li></ul></div>
+      <div><div class="foot-col-h">Contact</div><ul class="foot-links"><li><a href="tel:+13235550184">(323) 555-0184</a></li><li><a href="mailto:studio@apexauto.com">studio@apexauto.com</a></li><li><a href="#">4821 Motor Drive, LA</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><p class="foot-copy">© 2024 Apex Auto Detailing.</p><div class="foot-legal"><a href="#">Privacy</a><a href="#">Terms</a></div></div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

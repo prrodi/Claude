@@ -1,1225 +1,674 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apex Auto Detailing — Vaš Automobil. Savršen.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Apex Auto Detailing — Luxury car detailing studio. Paint correction, ceramic coating, interior detailing for exotic and luxury vehicles.">
+  <title>Apex Auto Detailing — Perfection In Every Reflection</title>
+  <link rel="stylesheet" href="css/main.css">
   <style>
-    /* ==============================
-       VARIABLES & RESET
-    ============================== */
-    :root {
-      --black:       #0a0a0a;
-      --black-light: #111111;
-      --black-card:  #141414;
-      --red:         #e63329;
-      --red-dark:    #c42820;
-      --white:       #ffffff;
-      --muted:       rgba(255,255,255,0.6);
-      --border:      rgba(255,255,255,0.08);
-      --nav-h:       72px;
-      --max-w:       1200px;
-    }
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      background:var(--black);
-      color:var(--white);
-      font-family:'Inter',sans-serif;
-      line-height:1.6;
-      overflow-x:hidden;
-    }
-    h1,h2,h3,h4 {
-      font-family:'Bebas Neue',sans-serif;
-      letter-spacing:.03em;
-      line-height:1;
-    }
-    a { color:inherit; text-decoration:none; }
-    img { display:block; max-width:100%; }
-
-    /* ==============================
-       UTILITIES
-    ============================== */
-    .container { max-width:var(--max-w); margin:0 auto; padding:0 2rem; }
-
-    .label {
-      display:inline-block;
-      font-size:.72rem; font-weight:700;
-      letter-spacing:.22em; text-transform:uppercase;
-      color:var(--red); margin-bottom:1rem;
-    }
-    .section-title { font-size:clamp(2.4rem,5vw,4rem); margin-bottom:.75rem; }
-    .section-sub   { font-size:1.05rem; color:var(--muted); max-width:540px; font-weight:300; }
-
-    .btn {
-      display:inline-flex; align-items:center; gap:.4rem;
-      padding:.85rem 2rem;
-      font-family:'Inter',sans-serif; font-size:.82rem;
-      font-weight:600; letter-spacing:.08em; text-transform:uppercase;
-      border-radius:4px; border:2px solid transparent;
-      cursor:pointer; transition:all .22s ease;
-    }
-    .btn-red  { background:var(--red); color:#fff; border-color:var(--red); }
-    .btn-red:hover  { background:var(--red-dark); border-color:var(--red-dark); transform:translateY(-2px); box-shadow:0 8px 28px rgba(230,51,41,.4); }
-    .btn-ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
-    .btn-ghost:hover { border-color:#fff; transform:translateY(-2px); }
-    .btn-full  { width:100%; justify-content:center; }
-
-    /* scroll reveal */
-    .reveal { opacity:0; transform:translateY(36px); transition:opacity .65s ease, transform .65s ease; }
-    .reveal.in { opacity:1; transform:none; }
-    .stagger > * { opacity:0; transform:translateY(28px); transition:opacity .55s ease, transform .55s ease; }
-    .stagger.in > *:nth-child(1){opacity:1;transform:none;transition-delay:.08s}
-    .stagger.in > *:nth-child(2){opacity:1;transform:none;transition-delay:.18s}
-    .stagger.in > *:nth-child(3){opacity:1;transform:none;transition-delay:.28s}
-    .stagger.in > *:nth-child(4){opacity:1;transform:none;transition-delay:.38s}
-    .stagger.in > *:nth-child(5){opacity:1;transform:none;transition-delay:.48s}
-    .stagger.in > *:nth-child(6){opacity:1;transform:none;transition-delay:.58s}
-
-    /* ==============================
-       NAV
-    ============================== */
-    .nav {
-      position:fixed; top:0; left:0; right:0; z-index:1000;
-      height:var(--nav-h);
-      display:flex; align-items:center;
-      transition:background .35s, backdrop-filter .35s, border-bottom .35s;
-    }
-    .nav.scrolled {
-      background:rgba(10,10,10,.88);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--border);
-    }
-    .nav-inner { display:flex; align-items:center; justify-content:space-between; width:100%; }
-
-    .logo {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:1.55rem; letter-spacing:.1em;
-    }
-    .logo span { color:var(--red); }
-
-    .nav-links { display:flex; align-items:center; gap:2.25rem; list-style:none; }
-    .nav-links a {
-      font-size:.8rem; font-weight:500;
-      letter-spacing:.1em; text-transform:uppercase;
-      color:var(--muted); position:relative;
-      transition:color .2s;
-    }
-    .nav-links a::after {
-      content:''; position:absolute; bottom:-3px; left:0;
-      width:0; height:1px; background:var(--red);
-      transition:width .28s;
-    }
-    .nav-links a:hover { color:#fff; }
-    .nav-links a:hover::after { width:100%; }
-    .nav-links .cta-link {
-      background:var(--red); color:#fff !important;
-      padding:.45rem 1.2rem; border-radius:4px; font-weight:600;
-      transition:background .2s, transform .2s !important;
-    }
-    .nav-links .cta-link::after { display:none; }
-    .nav-links .cta-link:hover { background:var(--red-dark) !important; transform:translateY(-1px); }
-
-    /* hamburger */
-    .burger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:4px; }
-    .burger span { display:block; width:24px; height:2px; background:#fff; border-radius:2px; transition:transform .3s, opacity .3s; }
-    .burger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-    .burger.open span:nth-child(2){ opacity:0; }
-    .burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
-    /* mobile drawer */
-    .mob-menu {
-      display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:999;
-      background:rgba(10,10,10,.97); backdrop-filter:blur(20px);
-      border-bottom:1px solid var(--border);
-      flex-direction:column; overflow:hidden;
-      max-height:0; transition:max-height .38s ease, padding .38s ease;
-    }
-    .mob-menu.open { max-height:380px; padding:1.25rem 2rem 1.75rem; }
-    .mob-menu a {
-      font-family:'Bebas Neue',sans-serif; font-size:1.45rem;
-      letter-spacing:.08em; color:var(--muted);
-      padding:.55rem 0; border-bottom:1px solid var(--border);
-      transition:color .2s;
-    }
-    .mob-menu a:hover { color:var(--red); }
-
-    /* ==============================
-       HERO
-    ============================== */
+    /* ---- HERO ---- */
     .hero {
       position:relative; height:100vh; min-height:680px;
-      display:flex; align-items:center; justify-content:center;
-      text-align:center; overflow:hidden;
+      display:flex; align-items:center; overflow:hidden;
     }
-
-    .hero-bg {
-      position:absolute; inset:0;
+    .hero-parallax {
+      position:absolute; inset:-15%; background-size:cover; background-position:center;
       background:
-        radial-gradient(ellipse 90% 55% at 50% 38%, rgba(230,51,41,.13) 0%, transparent 65%),
-        radial-gradient(ellipse 50% 60% at 15% 85%, rgba(230,51,41,.06) 0%, transparent 55%),
-        var(--black);
+        radial-gradient(ellipse 80% 60% at 65% 45%, rgba(201,150,63,.08) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 70% at 20% 80%, rgba(201,150,63,.04) 0%, transparent 50%),
+        linear-gradient(135deg,#090909 0%,#111 40%,#0c0c0c 70%,#080808 100%);
+      will-change:transform;
     }
-    .hero-bg::before {
+    /* subtle carbon-fiber texture */
+    .hero-parallax::before {
       content:''; position:absolute; inset:0;
-      background:repeating-linear-gradient(
-        -45deg, transparent, transparent 60px,
-        rgba(255,255,255,.011) 60px, rgba(255,255,255,.011) 61px
-      );
+      background:
+        repeating-linear-gradient(-45deg,transparent,transparent 6px,rgba(255,255,255,.006) 6px,rgba(255,255,255,.006) 7px),
+        repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(255,255,255,.006) 6px,rgba(255,255,255,.006) 7px);
     }
-
-    .orb {
-      position:absolute; border-radius:50%;
-      filter:blur(110px); pointer-events:none;
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to right,rgba(8,8,8,.88) 0%,rgba(8,8,8,.5) 55%,rgba(8,8,8,.1) 100%);
     }
-    .orb-1 { width:640px; height:640px; background:rgba(230,51,41,.14);
-              top:-120px; left:50%; transform:translateX(-50%);
-              animation:orb1 7s ease-in-out infinite; }
-    .orb-2 { width:320px; height:320px; background:rgba(230,51,41,.08);
-              bottom:8%; left:8%; animation:orb2 9s ease-in-out infinite; }
-    .orb-3 { width:260px; height:260px; background:rgba(230,51,41,.06);
-              top:18%; right:8%; animation:orb3 8s ease-in-out infinite 1.5s; }
-
-    @keyframes orb1 {
-      0%,100%{ opacity:.6; transform:translateX(-50%) scale(1); }
-      50%    { opacity:1;   transform:translateX(-50%) scale(1.12); }
-    }
-    @keyframes orb2 {
-      0%,100%{ opacity:.5; transform:scale(1); }
-      50%    { opacity:.9; transform:scale(1.18); }
-    }
-    @keyframes orb3 {
-      0%,100%{ opacity:.5; transform:scale(1); }
-      50%    { opacity:.9; transform:scale(1.12); }
-    }
-
-    .particles { position:absolute; inset:0; pointer-events:none; }
-    .p-dot {
-      position:absolute; border-radius:50%;
-      background:rgba(230,51,41,.7);
-      animation:pdot linear infinite;
-    }
-    @keyframes pdot {
-      0%  { transform:translateY(105vh) translateX(0); opacity:0; }
-      8%  { opacity:1; }
-      92% { opacity:1; }
-      100%{ transform:translateY(-8vh) translateX(var(--dx)); opacity:0; }
-    }
-
-    .hero-content { position:relative; z-index:1; max-width:920px; padding:0 2rem; }
-
+    .hero-particles { position:absolute; inset:0; pointer-events:none; z-index:1; }
+    .hero-content { position:relative; z-index:2; max-width:820px; }
     .hero-eyebrow {
       display:inline-flex; align-items:center; gap:.75rem;
-      font-size:.72rem; font-weight:700; letter-spacing:.25em;
-      text-transform:uppercase; color:var(--red); margin-bottom:1.5rem;
-      animation:fadeUp .8s ease forwards;
+      font-size:.65rem; font-weight:700; letter-spacing:.32em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:1.75rem;
+      animation:fadeUp .8s var(--ease) both;
     }
-    .hero-eyebrow::before,.hero-eyebrow::after {
-      content:''; width:28px; height:1px; background:var(--red);
-    }
-
+    .hero-eyebrow::before { content:''; width:24px; height:1px; background:var(--gold); }
     .hero-h1 {
-      font-size:clamp(3.8rem,10.5vw,9.5rem); line-height:.93;
-      margin-bottom:1.4rem;
-      animation:fadeUp .8s ease .14s both;
+      font-size:clamp(4rem,9vw,8.5rem); line-height:.9;
+      color:var(--white); margin-bottom:1.75rem;
+      animation:fadeUp .8s var(--ease) .15s both;
     }
-    .hero-h1 em { font-style:normal; color:var(--red); }
-
-    .hero-sub {
-      font-size:clamp(.95rem,1.8vw,1.15rem); color:var(--muted);
-      font-weight:300; max-width:480px; margin:0 auto 2.4rem;
-      line-height:1.75;
-      animation:fadeUp .8s ease .28s both;
+    .hero-h1 em { font-style:normal; display:block; color:var(--gold); }
+    .hero-p {
+      font-size:clamp(1rem,1.6vw,1.15rem); color:var(--w-60); font-weight:300;
+      max-width:480px; line-height:1.78; margin-bottom:2.75rem;
+      animation:fadeUp .8s var(--ease) .3s both;
     }
-
     .hero-ctas {
-      display:flex; align-items:center; justify-content:center;
-      gap:1rem; flex-wrap:wrap;
-      animation:fadeUp .8s ease .42s both;
+      display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+      animation:fadeUp .8s var(--ease) .45s both;
+    }
+    .hero-scroll {
+      position:absolute; bottom:2.25rem; left:50%; transform:translateX(-50%);
+      z-index:2; display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      animation:fadeUp 1s var(--ease) 1.2s both; opacity:.4;
+    }
+    .hero-scroll span { font-size:.58rem; letter-spacing:.28em; text-transform:uppercase; }
+    .scroll-l {
+      width:1px; height:36px; background:linear-gradient(to bottom,var(--gold),transparent);
+      animation:scrollDown 1.7s ease-in-out infinite;
+    }
+    @keyframes scrollDown {
+      0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}
+      51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+    /* ---- TRUST BAR ---- */
+    .trust-bar {
+      padding:2rem 0; background:var(--bg-1);
+      border-top:1px solid var(--bdr); border-bottom:1px solid var(--bdr);
     }
 
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(18px); }
-      to   { opacity:1; transform:none; }
-    }
-
-    .scroll-hint {
-      position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
-      z-index:1; display:flex; flex-direction:column; align-items:center; gap:.45rem;
-      opacity:.45; animation:fadeUp 1s ease 1.1s both;
-    }
-    .scroll-hint span { font-size:.65rem; letter-spacing:.22em; text-transform:uppercase; }
-    .scroll-line { width:1px; height:38px;
-      background:linear-gradient(to bottom,#fff,transparent);
-      animation:lineAnim 1.6s ease-in-out infinite; }
-    @keyframes lineAnim {
-      0%  { transform:scaleY(0); transform-origin:top; }
-      49% { transform:scaleY(1); transform-origin:top; }
-      50% { transform-origin:bottom; }
-      100%{ transform:scaleY(0); transform-origin:bottom; }
-    }
-
-    /* ==============================
-       SERVICES
-    ============================== */
-    .services { padding:8rem 0; background:var(--black); }
-    .sec-head  { text-align:center; margin-bottom:3.5rem; }
-
-    .svc-grid {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
-    }
-    .svc-card {
-      background:var(--black-card); border:1px solid var(--border);
-      border-radius:8px; padding:2rem;
-      transition:transform .28s, border-color .28s, box-shadow .28s;
-    }
-    .svc-card:hover {
-      transform:translateY(-6px);
-      border-color:var(--red);
-      box-shadow:0 14px 44px rgba(230,51,41,.12), 0 0 0 1px rgba(230,51,41,.18);
-    }
-    .svc-icon  { font-size:2.2rem; display:block; margin-bottom:1.1rem; }
-    .svc-title { font-size:1.4rem; letter-spacing:.05em; margin-bottom:.6rem; }
-    .svc-desc  { font-size:.875rem; color:var(--muted); line-height:1.7; font-weight:300; }
-
-    /* ==============================
-       STATS
-    ============================== */
-    .stats {
-      padding:4.5rem 0; background:var(--black-light);
-      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-    }
+    /* ---- STATS ---- */
+    .stats { padding:7rem 0; background:var(--bg); }
     .stats-grid {
-      display:grid; grid-template-columns:repeat(4,1fr); gap:0; text-align:center;
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:0; text-align:center;
     }
-    .stat-item { padding:1.5rem 1rem; position:relative; }
-    .stat-item:not(:last-child)::after {
+    .stat-cell { padding:2rem 1rem; position:relative; }
+    .stat-cell:not(:last-child)::after {
       content:''; position:absolute; right:0; top:50%; transform:translateY(-50%);
-      width:1px; height:60px; background:var(--border);
+      width:1px; height:70px; background:var(--bdr);
     }
-    .stat-num {
-      font-family:'Bebas Neue',sans-serif;
-      font-size:clamp(2.8rem,5vw,4.2rem);
-      line-height:1; margin-bottom:.4rem;
-    }
-    .stat-num .suffix { color:var(--red); }
-    .stat-lbl { font-size:.78rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+    .stat-num { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,5vw,4.5rem); line-height:1; }
+    .stat-num .gold { color:var(--gold); }
+    .stat-lbl { font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--w-50); margin-top:.6rem; }
 
-    /* ==============================
-       PROCESS
-    ============================== */
-    .process { padding:8rem 0; background:var(--black); }
-    .steps {
-      display:grid; grid-template-columns:1fr auto 1fr auto 1fr;
-      align-items:start; margin-top:3.5rem;
+    /* ---- SERVICES PREVIEW ---- */
+    .svc { background:var(--bg-1); }
+    .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--bdr); }
+    .svc-card {
+      background:var(--bg-1); padding:2.5rem 2rem;
+      transition:background .28s, color .28s;
+      cursor:default; position:relative; overflow:hidden;
     }
-    .step { text-align:center; padding:0 .5rem; }
-    .step-num { font-family:'Bebas Neue',sans-serif; font-size:3.8rem; color:rgba(230,51,41,.14); line-height:1; margin-bottom:.3rem; }
-    .step-ico  { font-size:2rem; display:block; margin-bottom:.9rem; }
-    .step-title{ font-size:1.4rem; letter-spacing:.05em; margin-bottom:.6rem; }
-    .step-desc { font-size:.875rem; color:var(--muted); font-weight:300; line-height:1.7; }
-    .connector { display:flex; align-items:center; padding-top:2.8rem; }
-    .connector::after {
-      content:''; display:block; width:56px;
-      border-top:2px dashed rgba(230,51,41,.28);
+    .svc-card::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,var(--gold-a) 0%,transparent 60%);
+      opacity:0; transition:opacity .32s;
+    }
+    .svc-card:hover { background:var(--bg-2); }
+    .svc-card:hover::after { opacity:1; }
+    .svc-card:hover .svc-ico { color:var(--gold); transform:scale(1.05); }
+    .svc-ico { font-size:2rem; display:block; margin-bottom:1.25rem; transition:color .28s, transform .28s; }
+    .svc-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.04em; margin-bottom:.6rem; }
+    .svc-desc  { font-size:.88rem; color:var(--w-55); font-weight:300; line-height:1.72; margin-bottom:1.25rem; }
+    .svc-link  { font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); transition:gap .22s; display:inline-flex; align-items:center; gap:.4rem; }
+    .svc-link::after { content:'→'; transition:transform .22s; }
+    .svc-card:hover .svc-link::after { transform:translateX(4px); }
+
+    /* ---- BEFORE / AFTER ---- */
+    .ba-section { background:var(--bg-2); }
+    .ba-layout { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+    .ba-wrap   { height:480px; }
+    .ba-after  { background:linear-gradient(145deg,#1e1e1e,#2a2a2a); }
+    .ba-before-inner { background:linear-gradient(145deg,#0a0a0a,#141414); }
+    .ba-after-label,.ba-before-inner-label {
+      position:absolute; bottom:1rem; font-size:.58rem; font-weight:700;
+      letter-spacing:.22em; text-transform:uppercase; padding:.3rem .75rem; border-radius:2px; z-index:5;
     }
 
-    /* ==============================
-       GALLERY
-    ============================== */
-    .gallery { padding:8rem 0; background:var(--black-light); }
-    .gal-grid {
+    /* ---- WHY US ---- */
+    .why { background:var(--bg); }
+    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+    .why-card {
+      background:var(--bg-2); border:1px solid var(--bdr); border-radius:8px;
+      padding:2.25rem 1.75rem; transition:all .32s var(--ease);
+    }
+    .why-card:hover { border-color:var(--bdr-gd); transform:translateY(-4px); box-shadow:0 16px 50px rgba(0,0,0,.4); }
+    .why-num { font-family:'Bebas Neue',sans-serif; font-size:1rem; color:var(--gold); letter-spacing:.15em; margin-bottom:1rem; }
+    .why-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:.04em; margin-bottom:.65rem; }
+    .why-desc  { font-size:.875rem; color:var(--w-55); line-height:1.75; font-weight:300; }
+
+    /* ---- GALLERY PREVIEW ---- */
+    .gal-prev { background:var(--bg-1); }
+    .gal-prev-grid {
       display:grid;
       grid-template-columns:repeat(12,1fr);
-      grid-template-rows:repeat(2,220px);
-      gap:10px; margin-top:2.5rem;
+      grid-template-rows:240px 240px;
+      gap:10px;
     }
-    .gal-grid .gi:nth-child(1){ grid-column:span 5; }
-    .gal-grid .gi:nth-child(2){ grid-column:span 4; }
-    .gal-grid .gi:nth-child(3){ grid-column:span 3; }
-    .gal-grid .gi:nth-child(4){ grid-column:span 3; }
-    .gal-grid .gi:nth-child(5){ grid-column:span 4; }
-    .gal-grid .gi:nth-child(6){ grid-column:span 5; }
-
-    .gi { position:relative; overflow:hidden; border-radius:6px; cursor:pointer; }
-    .gi-bg {
-      width:100%; height:100%;
+    .gp-item { position:relative; overflow:hidden; border-radius:6px; cursor:pointer; }
+    .gp-item:nth-child(1){grid-column:span 5;}
+    .gp-item:nth-child(2){grid-column:span 4;}
+    .gp-item:nth-child(3){grid-column:span 3;}
+    .gp-item:nth-child(4){grid-column:span 3;}
+    .gp-item:nth-child(5){grid-column:span 4;}
+    .gp-item:nth-child(6){grid-column:span 5;}
+    .gp-ph {
+      width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+      font-size:.6rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--w-15); transition:transform .5s var(--ease);
+    }
+    .gp-item:nth-child(1) .gp-ph{background:linear-gradient(145deg,#111,#1e1e1e);}
+    .gp-item:nth-child(2) .gp-ph{background:linear-gradient(145deg,#181818,#0e0e0e);}
+    .gp-item:nth-child(3) .gp-ph{background:linear-gradient(145deg,#141414,#202020);}
+    .gp-item:nth-child(4) .gp-ph{background:linear-gradient(145deg,#1c1c1c,#101010);}
+    .gp-item:nth-child(5) .gp-ph{background:linear-gradient(145deg,#101010,#1a1a1a);}
+    .gp-item:nth-child(6) .gp-ph{background:linear-gradient(145deg,#161616,#0c0c0c);}
+    .gp-ov {
+      position:absolute; inset:0; background:rgba(201,150,63,0);
       display:flex; align-items:center; justify-content:center;
-      font-size:.7rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase;
-      color:rgba(255,255,255,.2);
-      transition:transform .5s ease;
-    }
-    .gi:nth-child(1) .gi-bg { background:linear-gradient(135deg,#1a1a1a,#252525); }
-    .gi:nth-child(2) .gi-bg { background:linear-gradient(135deg,#1c1c1c,#2a2a2a); }
-    .gi:nth-child(3) .gi-bg { background:linear-gradient(135deg,#181818,#232323); }
-    .gi:nth-child(4) .gi-bg { background:linear-gradient(135deg,#202020,#2d2d2d); }
-    .gi:nth-child(5) .gi-bg { background:linear-gradient(135deg,#1b1b1b,#272727); }
-    .gi:nth-child(6) .gi-bg { background:linear-gradient(135deg,#191919,#242424); }
-
-    .gi-over {
-      position:absolute; inset:0;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem;
-      background:rgba(230,51,41,0);
       transition:background .28s;
     }
-    .gi:hover .gi-over { background:rgba(230,51,41,.68); }
-    .gi:hover .gi-bg   { transform:scale(1.06); }
+    .gp-item:hover .gp-ov { background:rgba(201,150,63,.6); }
+    .gp-item:hover .gp-ph { transform:scale(1.07); }
+    .gp-ico {
+      width:40px; height:40px; border:2px solid rgba(8,8,8,.85); border-radius:50%;
+      background:rgba(8,8,8,.7); display:flex; align-items:center; justify-content:center;
+      opacity:0; transform:scale(.7); transition:opacity .25s, transform .25s;
+    }
+    .gp-ico svg { width:14px; height:14px; stroke:var(--white); fill:none; }
+    .gp-item:hover .gp-ico { opacity:1; transform:scale(1); }
 
-    .gi-zoom {
-      width:38px; height:38px; border:2px solid rgba(255,255,255,.9);
-      border-radius:50%; display:flex; align-items:center; justify-content:center;
-      opacity:0; transform:scale(.75); transition:opacity .25s, transform .25s;
+    /* ---- TESTIMONIALS ---- */
+    .testi { background:var(--bg-2); overflow:hidden; }
+    .t-track-wrap { overflow:hidden; position:relative; margin-top:3rem; }
+    .t-track-wrap::before,.t-track-wrap::after {
+      content:''; position:absolute; top:0; bottom:0; width:120px; z-index:2; pointer-events:none;
     }
-    .gi-zoom svg { width:14px; height:14px; }
-    .gi:hover .gi-zoom { opacity:1; transform:scale(1); }
-
-    .gi-lbl {
-      font-size:.65rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-      opacity:0; transition:opacity .25s; color:#fff;
-    }
-    .gi:hover .gi-lbl { opacity:1; }
-
-    /* ==============================
-       PRICING
-    ============================== */
-    .pricing { padding:8rem 0; background:var(--black); }
-    .price-grid {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
-      margin-top:3rem; align-items:start;
-    }
-    .price-card {
-      background:var(--black-card); border:1px solid var(--border);
-      border-radius:10px; padding:2.25rem 1.9rem;
-      position:relative; transition:transform .28s;
-    }
-    .price-card:hover { transform:translateY(-4px); }
-    .price-card.featured {
-      border-color:var(--red);
-      box-shadow:0 0 50px rgba(230,51,41,.18), 0 0 0 1px rgba(230,51,41,.12);
-      transform:translateY(-10px);
-    }
-    .price-card.featured:hover { transform:translateY(-14px); }
-    .badge {
-      position:absolute; top:-13px; left:50%; transform:translateX(-50%);
-      background:var(--red); color:#fff;
-      font-size:.66rem; font-weight:700; letter-spacing:.14em;
-      text-transform:uppercase; padding:.3rem .9rem; border-radius:20px; white-space:nowrap;
-    }
-    .tier { font-size:.75rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--red); margin-bottom:.9rem; }
-    .price-row { display:flex; align-items:flex-start; gap:.2rem; margin-bottom:.4rem; }
-    .p-sign  { font-size:1.4rem; font-weight:600; color:var(--muted); margin-top:.55rem; }
-    .p-val   { font-family:'Bebas Neue',sans-serif; font-size:4.2rem; line-height:1; }
-    .p-desc  { font-size:.85rem; color:var(--muted); padding-bottom:1.5rem; margin-bottom:1.5rem; border-bottom:1px solid var(--border); }
-    .p-feats { list-style:none; margin-bottom:1.75rem; display:flex; flex-direction:column; gap:.65rem; }
-    .p-feats li { display:flex; gap:.65rem; font-size:.865rem; color:var(--muted); align-items:flex-start; }
-    .p-feats li::before { content:'✓'; color:var(--red); font-weight:700; flex-shrink:0; }
-
-    /* ==============================
-       TESTIMONIALS
-    ============================== */
-    .testi { padding:8rem 0; background:var(--black-light); overflow:hidden; }
-    .track-wrap {
-      overflow:hidden; margin-top:2.75rem; position:relative;
-    }
-    .track-wrap::before,.track-wrap::after {
-      content:''; position:absolute; top:0; bottom:0; width:100px; z-index:2; pointer-events:none;
-    }
-    .track-wrap::before { left:0;  background:linear-gradient(to right,var(--black-light),transparent); }
-    .track-wrap::after  { right:0; background:linear-gradient(to left, var(--black-light),transparent); }
-
-    .track {
+    .t-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg-2),transparent);}
+    .t-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg-2),transparent);}
+    .t-track {
       display:flex; gap:1.25rem; width:max-content;
-      animation:slide 32s linear infinite;
+      animation:tSlide 35s linear infinite;
     }
-    .track:hover { animation-play-state:paused; }
-    @keyframes slide { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
+    .t-track:hover { animation-play-state:paused; }
+    @keyframes tSlide{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
     .t-card {
-      background:var(--black-card); border:1px solid var(--border);
-      border-radius:10px; padding:1.85rem; width:330px; flex-shrink:0;
+      width:340px; flex-shrink:0; background:var(--bg-3);
+      border:1px solid var(--bdr); border-radius:10px; padding:2rem;
     }
-    .stars { color:#f5a623; font-size:.95rem; letter-spacing:2px; margin-bottom:.9rem; }
-    .t-quote {
-      font-size:.9rem; color:var(--muted); font-style:italic;
-      font-weight:300; line-height:1.78; margin-bottom:1.4rem;
-    }
+    .t-stars  { color:#c9963f; font-size:.9rem; letter-spacing:2px; margin-bottom:1rem; }
+    .t-quote  { font-size:.9rem; color:var(--w-60); font-style:italic; font-weight:300; line-height:1.8; margin-bottom:1.5rem; }
     .t-author { display:flex; align-items:center; gap:.75rem; }
-    .avatar {
-      width:38px; height:38px; border-radius:50%; flex-shrink:0;
-      background:linear-gradient(135deg,var(--red),#ff7060);
-      display:flex; align-items:center; justify-content:center;
-      font-family:'Bebas Neue',sans-serif; font-size:.95rem;
-    }
-    .a-name { font-weight:600; font-size:.85rem; }
-    .a-car  { font-size:.78rem; color:var(--red); font-weight:500; margin-top:.1rem; }
+    .t-av     { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--gold-dk)); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:.9rem; color:var(--bg); flex-shrink:0; }
+    .t-name   { font-weight:600; font-size:.85rem; }
+    .t-car    { font-size:.76rem; color:var(--gold); font-weight:500; margin-top:.1rem; }
 
-    /* ==============================
-       FAQ
-    ============================== */
-    .faq { padding:8rem 0; background:var(--black); }
-    .faq-list { max-width:780px; margin:3rem auto 0; }
-    .faq-item { border-bottom:1px solid var(--border); }
-    .faq-item:first-child { border-top:1px solid var(--border); }
-    .faq-q {
-      display:flex; align-items:center; justify-content:space-between; gap:1rem;
-      padding:1.4rem 0; cursor:pointer;
-      font-size:.975rem; font-weight:500; color:var(--white);
-      transition:color .2s; user-select:none;
+    /* ---- PROCESS ---- */
+    .process  { background:var(--bg-1); }
+    .proc-grid {
+      display:grid; grid-template-columns:repeat(5,1fr);
+      gap:0; position:relative; margin-top:4rem;
     }
-    .faq-q:hover { color:var(--red); }
-    .faq-icon {
-      width:24px; height:24px; flex-shrink:0;
-      border:1px solid var(--border); border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1rem; color:var(--muted);
-      transition:background .28s, border-color .28s, transform .28s, color .28s;
+    .proc-grid::before {
+      content:''; position:absolute; top:2.5rem; left:10%; right:10%;
+      height:1px; background:linear-gradient(to right,transparent,var(--bdr2) 20%,var(--bdr2) 80%,transparent);
     }
-    .faq-item.open .faq-icon {
-      background:var(--red); border-color:var(--red);
-      transform:rotate(45deg); color:#fff;
+    .proc-step { text-align:center; padding:0 1rem; }
+    .proc-dot {
+      width:48px; height:48px; border-radius:50%; border:1px solid var(--bdr-gd);
+      background:var(--bg-1); display:flex; align-items:center; justify-content:center;
+      margin:0 auto 1.25rem; font-size:1.25rem; position:relative; z-index:1;
+      transition:background .28s, box-shadow .28s;
     }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .38s ease; }
-    .faq-item.open .faq-a { max-height:280px; }
-    .faq-a-inner { padding:0 0 1.4rem; font-size:.915rem; color:var(--muted); line-height:1.78; font-weight:300; }
+    .proc-step:hover .proc-dot {
+      background:var(--gold-a); box-shadow:0 0 0 6px rgba(201,150,63,.1);
+    }
+    .proc-title { font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:.04em; margin-bottom:.5rem; }
+    .proc-desc  { font-size:.82rem; color:var(--w-50); font-weight:300; line-height:1.72; }
 
-    /* ==============================
-       CONTACT
-    ============================== */
-    .contact { padding:8rem 0; background:var(--black-light); }
-    .contact-grid {
-      display:grid; grid-template-columns:1fr 1.6fr; gap:4.5rem;
-      margin-top:3rem; align-items:start;
+    /* ---- CTA BANNER ---- */
+    .cta-banner {
+      padding:8rem 0; background:var(--bg-2); position:relative; overflow:hidden;
+      text-align:center;
     }
-    .info-title { font-size:1.45rem; letter-spacing:.05em; margin-bottom:1.75rem; }
-    .info-items { display:flex; flex-direction:column; gap:1.35rem; margin-bottom:2rem; }
-    .info-item { display:flex; align-items:flex-start; gap:.9rem; }
-    .info-ico {
-      width:38px; height:38px; flex-shrink:0;
-      background:rgba(230,51,41,.1); border:1px solid rgba(230,51,41,.2);
-      border-radius:6px; display:flex; align-items:center; justify-content:center;
-      font-size:.95rem;
+    .cta-banner::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(201,150,63,.07) 0%,transparent 65%);
+      pointer-events:none;
     }
-    .info-text strong { display:block; font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:.15rem; }
-    .info-text span   { font-size:.9rem; }
-    .hours { margin-top:2rem; }
-    .hours-title { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:.85rem; }
-    .hours-row { display:flex; justify-content:space-between; padding:.35rem 0; border-bottom:1px solid var(--border); font-size:.875rem; }
-    .hours-row:last-child { border-bottom:none; }
-    .hours-day  { color:var(--muted); }
-    .hours-time { color:var(--white); font-weight:500; }
+    .cta-glow {
+      position:absolute; width:500px; height:500px; border-radius:50%;
+      background:radial-gradient(circle,rgba(201,150,63,.06) 0%,transparent 65%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      animation:ctaPulse 6s ease-in-out infinite;
+    }
+    @keyframes ctaPulse {
+      0%,100%{transform:translate(-50%,-50%) scale(1); opacity:.5}
+      50%{transform:translate(-50%,-50%) scale(1.15); opacity:1}
+    }
+    .cta-banner .content { position:relative; z-index:1; }
+    .cta-h2 { font-size:clamp(2.8rem,6vw,5.5rem); line-height:.92; margin-bottom:1.5rem; }
+    .cta-h2 span { display:block; color:var(--gold); }
+    .cta-p  { font-size:1.05rem; color:var(--w-55); font-weight:300; max-width:500px; margin:0 auto 2.75rem; line-height:1.75; }
+    .cta-buttons { display:flex; align-items:center; justify-content:center; gap:1rem; flex-wrap:wrap; }
 
-    .form-wrap { background:var(--black-card); border:1px solid var(--border); border-radius:12px; padding:2.25rem; }
-    .form-head  { font-size:1.7rem; letter-spacing:.04em; margin-bottom:.4rem; }
-    .form-sub   { font-size:.875rem; color:var(--muted); margin-bottom:1.75rem; }
-    .f-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    .f-group { display:flex; flex-direction:column; gap:.4rem; margin-bottom:.9rem; }
-    .f-group label { font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
-    .f-group input, .f-group select, .f-group textarea {
-      background:rgba(255,255,255,.04); border:1px solid var(--border);
-      border-radius:6px; padding:.7rem .9rem;
-      color:#fff; font-family:'Inter',sans-serif; font-size:.88rem;
-      outline:none; transition:border-color .2s, background .2s;
-      -webkit-appearance:none;
-    }
-    .f-group input:focus,.f-group select:focus,.f-group textarea:focus {
-      border-color:var(--red); background:rgba(230,51,41,.04);
-    }
-    .f-group select option { background:#1a1a1a; }
-    .f-group textarea { resize:vertical; min-height:96px; }
-
-    .success-msg {
-      display:none; background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.28);
-      border-radius:8px; padding:1.1rem; text-align:center;
-      color:#22c55e; font-weight:500; font-size:.9rem; margin-top:1rem;
-    }
-    .success-msg.show { display:block; animation:fadeUp .4s ease forwards; }
-
-    /* ==============================
-       FOOTER
-    ============================== */
-    .footer { background:#050505; border-top:1px solid var(--border); padding:4.5rem 0 2rem; }
-    .foot-grid {
-      display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem;
-    }
-    .foot-brand p { font-size:.875rem; color:var(--muted); font-weight:300; line-height:1.75; margin-top:1rem; max-width:250px; }
-    .socials { display:flex; gap:.65rem; margin-top:1.5rem; }
-    .soc {
-      width:36px; height:36px; background:rgba(255,255,255,.05);
-      border:1px solid var(--border); border-radius:6px;
-      display:flex; align-items:center; justify-content:center;
-      transition:background .2s, border-color .2s, transform .2s; cursor:pointer;
-    }
-    .soc:hover { background:var(--red); border-color:var(--red); transform:translateY(-2px); }
-    .soc svg { width:15px; height:15px; fill:#fff; }
-
-    .foot-col-title { font-size:.72rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#fff; margin-bottom:1.1rem; }
-    .foot-links { list-style:none; display:flex; flex-direction:column; gap:.65rem; }
-    .foot-links a { font-size:.85rem; color:var(--muted); transition:color .2s; }
-    .foot-links a:hover { color:var(--red); }
-
-    .foot-bottom {
-      border-top:1px solid var(--border); padding-top:1.75rem;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .foot-copy  { font-size:.78rem; color:var(--muted); }
-    .foot-legal { display:flex; gap:1.5rem; }
-    .foot-legal a { font-size:.78rem; color:var(--muted); transition:color .2s; }
-    .foot-legal a:hover { color:#fff; }
-
-    /* ==============================
-       RESPONSIVE
-    ============================== */
+    /* ---- RESPONSIVE HOME ---- */
     @media(max-width:1024px){
-      .svc-grid   { grid-template-columns:repeat(2,1fr); }
-      .stats-grid { grid-template-columns:repeat(2,1fr); }
-      .stat-item:nth-child(2)::after,.stat-item:nth-child(4)::after { display:none; }
-      .steps      { grid-template-columns:1fr; gap:2.5rem; }
-      .connector  { display:none; }
-      .gal-grid   { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
-      .gal-grid .gi:nth-child(n) { grid-column:span 1; }
-      .price-grid  { grid-template-columns:1fr; max-width:400px; margin-inline:auto; }
-      .price-card.featured { transform:none; }
-      .price-card.featured:hover { transform:translateY(-4px); }
-      .contact-grid{ grid-template-columns:1fr; gap:3rem; }
-      .foot-grid   { grid-template-columns:1fr 1fr; gap:2rem; }
+      .svc-grid     { grid-template-columns:repeat(2,1fr); }
+      .why-grid     { grid-template-columns:repeat(2,1fr); }
+      .proc-grid    { grid-template-columns:repeat(3,1fr); gap:2rem; }
+      .proc-grid::before { display:none; }
+      .ba-layout    { grid-template-columns:1fr; }
+      .ba-wrap      { height:360px; }
+      .stats-grid   { grid-template-columns:repeat(2,1fr); }
+      .stat-cell:nth-child(2)::after,.stat-cell:nth-child(4)::after{display:none;}
+      .gal-prev-grid{ grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
+      .gal-prev-grid .gp-item:nth-child(n){grid-column:span 1;}
+      .gal-prev-grid .gp-item{height:200px;}
     }
     @media(max-width:768px){
-      .nav-links { display:none; }
-      .burger    { display:flex; }
-      .mob-menu  { display:flex; }
       .svc-grid  { grid-template-columns:1fr; }
-      .gal-grid  { grid-template-columns:1fr; grid-template-rows:auto; height:auto; }
-      .gal-grid .gi { height:180px; }
-      .f-row     { grid-template-columns:1fr; }
-      .foot-grid { grid-template-columns:1fr; }
-      .foot-bottom{ flex-direction:column; gap:1rem; text-align:center; }
-    }
-    @media(max-width:480px){
-      .hero-ctas { flex-direction:column; width:100%; }
-      .hero-ctas .btn { width:100%; }
-      .stats-grid { grid-template-columns:1fr 1fr; }
+      .why-grid  { grid-template-columns:1fr; }
+      .proc-grid { grid-template-columns:1fr; }
+      .stats-grid{ grid-template-columns:repeat(2,1fr); }
+      .gal-prev-grid{ grid-template-columns:1fr; }
+      .gal-prev-grid .gp-item{height:180px;}
+      .hero-ctas { flex-direction:column; }
+      .hero-ctas .btn { width:100%; justify-content:center; }
     }
   </style>
 </head>
 <body>
 
-<!-- ==============================
-     NAV
-============================== -->
+<!-- NAV -->
 <nav class="nav" id="nav">
   <div class="container">
     <div class="nav-inner">
-      <a href="#" class="logo">APEX <span>AUTO</span></a>
-      <ul class="nav-links">
-        <li><a href="#services">Usluge</a></li>
-        <li><a href="#about">O Nama</a></li>
-        <li><a href="#gallery">Galerija</a></li>
-        <li><a href="#pricing">Cene</a></li>
-        <li><a href="#contact" class="cta-link">Rezerviši</a></li>
-      </ul>
-      <button class="burger" id="burger" aria-label="Otvori meni">
-        <span></span><span></span><span></span>
-      </button>
+      <a href="index.html" class="logo">
+        <div class="logo-main">APEX <span>AUTO</span></div>
+        <div class="logo-sub">Detailing Studio</div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="nav-cta">Book Now</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="#services">Usluge</a>
-  <a href="#about">O Nama</a>
-  <a href="#gallery">Galerija</a>
-  <a href="#pricing">Cene</a>
-  <a href="#contact">Rezerviši</a>
+<nav class="mob-nav" id="mobNav">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-parallax hero-parallax"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="pts"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Luxury Detailing Studio · Est. 2016</div>
+      <h1 class="hero-h1">Perfection<em>In Every<br>Reflection.</em></h1>
+      <p class="hero-p">We treat every vehicle as a work of art. From concours-level paint correction to lifetime ceramic protection — crafted for those who demand the best.</p>
+      <div class="hero-ctas">
+        <a href="contact.html" class="btn btn-gold">
+          Book Appointment
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="services.html" class="btn btn-outline">View Services</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-l"></div>
+  </div>
+</section>
+
+<!-- TRUST MARQUEE BAR -->
+<div class="trust-bar">
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="m-item"><div class="m-dot"></div>Ceramic Pro Certified</div>
+      <div class="m-item"><div class="m-dot"></div>IDA Member Studio</div>
+      <div class="m-item"><div class="m-dot"></div>Gyeon Quartz Certified</div>
+      <div class="m-item"><div class="m-dot"></div>Paint Protection Film</div>
+      <div class="m-item"><div class="m-dot"></div>XPEL Authorized Dealer</div>
+      <div class="m-item"><div class="m-dot"></div>Exotic Vehicle Specialists</div>
+      <div class="m-item"><div class="m-dot"></div>8 Years of Excellence</div>
+      <div class="m-item"><div class="m-dot"></div>500+ Vehicles Serviced</div>
+      <!-- duplicate for seamless loop -->
+      <div class="m-item"><div class="m-dot"></div>Ceramic Pro Certified</div>
+      <div class="m-item"><div class="m-dot"></div>IDA Member Studio</div>
+      <div class="m-item"><div class="m-dot"></div>Gyeon Quartz Certified</div>
+      <div class="m-item"><div class="m-dot"></div>Paint Protection Film</div>
+      <div class="m-item"><div class="m-dot"></div>XPEL Authorized Dealer</div>
+      <div class="m-item"><div class="m-dot"></div>Exotic Vehicle Specialists</div>
+      <div class="m-item"><div class="m-dot"></div>8 Years of Excellence</div>
+      <div class="m-item"><div class="m-dot"></div>500+ Vehicles Serviced</div>
+    </div>
+  </div>
 </div>
 
-<!-- ==============================
-     HERO
-============================== -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="particles" id="pts"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Premium Detailing Studio</div>
-    <h1 class="hero-h1">Vaš Automobil.<br><em>Savršen.</em></h1>
-    <p class="hero-sub">
-      Profesionalni detailing koji obnavlja, štiti i transformiše vaše vozilo
-      do salonskg sjaja — svaki put, bez kompromisa.
-    </p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn btn-red">Rezervišite Termin</a>
-      <a href="#services" class="btn btn-ghost">Pogledajte Usluge</a>
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <span>Skroluj</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- ==============================
-     SERVICES
-============================== -->
-<section class="services" id="services">
-  <div class="container">
-    <div class="sec-head reveal">
-      <span class="label">Šta Radimo</span>
-      <h2 class="section-title">Naše Usluge</h2>
-      <p class="section-sub" style="margin:0 auto">Od temeljnog pranja do potpune korekcije laka — nudimo sve što je vašem vozilu potrebno da izgleda besprekorno.</p>
-    </div>
-    <div class="svc-grid stagger">
-      <div class="svc-card">
-        <span class="svc-icon">🚿</span>
-        <h3 class="svc-title">Pranje i Voskiranje</h3>
-        <p class="svc-desc">Temeljno ručno pranje, tretman gline i primena premium karnaubskog voska za dubok, zaštićen sjaj.</p>
-      </div>
-      <div class="svc-card">
-        <span class="svc-icon">🔬</span>
-        <h3 class="svc-title">Korekcija Laka</h3>
-        <p class="svc-desc">Višestepeno mašinsko poliranje za uklanjanje vrtložnih ogrebotina i oksidacije — vraćamo lak u fabričko stanje.</p>
-      </div>
-      <div class="svc-card">
-        <span class="svc-icon">💎</span>
-        <h3 class="svc-title">Keramička Zaštita</h3>
-        <p class="svc-desc">Industrijska nano-keramička zaštita koja se hemijski vezuje za lak i pruža godinama hidrofobnu odbranu od elemenata.</p>
-      </div>
-      <div class="svc-card">
-        <span class="svc-icon">🪑</span>
-        <h3 class="svc-title">Dubinsko Čišćenje Enterijera</h3>
-        <p class="svc-desc">Potpuna obnova enterijera — parno čišćenje, negu kože, eliminaciju mirisa i detaljnu obradu svih površina.</p>
-      </div>
-      <div class="svc-card">
-        <span class="svc-icon">⚙️</span>
-        <h3 class="svc-title">Detailing Motornog Prostora</h3>
-        <p class="svc-desc">Profesionalno odmašćivanje i obrada motornog prostora, uz vraćanje čistog, kao-novog izgleda ispod haube.</p>
-      </div>
-      <div class="svc-card">
-        <span class="svc-icon">💡</span>
-        <h3 class="svc-title">Obnova Farova</h3>
-        <p class="svc-desc">Višestepeno mokro brušenje i poliranje za uklanjanje požutelosti i zamućenja — vraćamo vidljivost i bezbednost.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================
-     STATS
-============================== -->
-<section class="stats" id="about">
+<!-- STATS -->
+<section class="stats count-wrap">
   <div class="container">
     <div class="stats-grid stagger">
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="500">0</span><span class="suffix">+</span></div>
-        <div class="stat-lbl">Detajliranih Automobila</div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-target="500">0</span><span class="gold">+</span></div>
+        <div class="stat-lbl">Vehicles Serviced</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="5">0</span><span class="suffix">★</span></div>
-        <div class="stat-lbl">Prosečna Ocena</div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-target="8">0</span><span class="gold"> Yrs</span></div>
+        <div class="stat-lbl">In Operation</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="8">0</span><span class="suffix"> God</span></div>
-        <div class="stat-lbl">Iskustva</div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-target="5" data-dec="1">0</span><span class="gold">★</span></div>
+        <div class="stat-lbl">Average Rating</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="count" data-target="100">0</span><span class="suffix">%</span></div>
-        <div class="stat-lbl">Zadovoljnih Klijenata</div>
+      <div class="stat-cell">
+        <div class="stat-num"><span data-target="100">0</span><span class="gold">%</span></div>
+        <div class="stat-lbl">Satisfaction Rate</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     PROCESS
-============================== -->
-<section class="process">
+<!-- SERVICES PREVIEW -->
+<section class="svc" id="services">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="label">Proces</span>
-      <h2 class="section-title">Kako Funkcioniše</h2>
-      <p class="section-sub" style="margin:0 auto">Tri jednostavna koraka do besprekorno čistog automobila.</p>
+      <span class="label">What We Do</span>
+      <h2 class="sec-title">Our Services</h2>
+      <p class="sec-sub">Every service is performed with professional-grade products, trained hands, and obsessive attention to detail.</p>
     </div>
-    <div class="steps stagger">
-      <div class="step">
-        <div class="step-num">01</div>
-        <span class="step-ico">📱</span>
-        <h3 class="step-title">Rezervišite Online</h3>
-        <p class="step-desc">Izaberite uslugu, odaberite termin koji vam odgovara i potvrdite rezervaciju za nekoliko minuta.</p>
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <span class="svc-ico">💎</span>
+        <div class="svc-title">Ceramic Coating</div>
+        <p class="svc-desc">Semi-permanent nano-ceramic protection that chemically bonds to your paint — delivering years of hydrophobic defense and mirror-like gloss.</p>
+        <a href="services.html" class="svc-link">Learn More</a>
       </div>
-      <div class="connector"></div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <span class="step-ico">🧹</span>
-        <h3 class="step-title">Mi Detajliramo Vaš Auto</h3>
-        <p class="step-desc">Naši sertifikovani tehničari rade sa profesionalnim preparatima i posvećenom pažnjom na svaku površinu.</p>
+      <div class="svc-card reveal">
+        <span class="svc-ico">🔬</span>
+        <div class="svc-title">Paint Correction</div>
+        <p class="svc-desc">Multi-stage machine polishing to eliminate swirl marks, light scratches, and oxidation — restoring depth and clarity to factory-new perfection.</p>
+        <a href="services.html" class="svc-link">Learn More</a>
       </div>
-      <div class="connector"></div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <span class="step-ico">🚗</span>
-        <h3 class="step-title">Odviozite Savršen Auto</h3>
-        <p class="step-desc">Preuzmite vozilo koje izgleda i miriše kao novo — uz garanciju 100% zadovoljstva.</p>
+      <div class="svc-card reveal">
+        <span class="svc-ico">✨</span>
+        <div class="svc-title">Full Detail Package</div>
+        <p class="svc-desc">Our most comprehensive treatment — a complete top-to-bottom transformation covering every surface, inside and out.</p>
+        <a href="services.html" class="svc-link">Learn More</a>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-ico">🪑</span>
+        <div class="svc-title">Interior Detailing</div>
+        <p class="svc-desc">Steam extraction, leather conditioning, alcantara care, and odor elimination — returning your cabin to showroom condition.</p>
+        <a href="services.html" class="svc-link">Learn More</a>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-ico">🚿</span>
+        <div class="svc-title">Exterior Detailing</div>
+        <p class="svc-desc">Clay bar decontamination, foam pre-wash, hand wash, iron removal, and premium wax application for a deep, flawless finish.</p>
+        <a href="services.html" class="svc-link">Learn More</a>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-ico">⚙️</span>
+        <div class="svc-title">Maintenance Wash</div>
+        <p class="svc-desc">A meticulous touchless-safe maintenance wash using pH-neutral products — ideal for protected vehicles between major details.</p>
+        <a href="services.html" class="svc-link">Learn More</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     GALLERY
-============================== -->
-<section class="gallery" id="gallery">
+<!-- BEFORE / AFTER -->
+<section class="ba-section" id="results">
   <div class="container">
-    <div class="sec-head reveal">
-      <span class="label">Naš Rad</span>
-      <h2 class="section-title">Rezultati Koji Govore</h2>
-      <p class="section-sub" style="margin:0 auto">Svaki automobil koji napusti naš studio svedoči o našem zanatu i posvećenosti savršenstvu.</p>
-    </div>
-    <div class="gal-grid reveal">
-      <div class="gi">
-        <div class="gi-bg">Pre / Posle</div>
-        <div class="gi-over">
-          <div class="gi-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
-          <span class="gi-lbl">Korekcija Laka</span>
-        </div>
+    <div class="ba-layout">
+      <div class="reveal-l">
+        <span class="label">The Transformation</span>
+        <h2 class="sec-title">Results<br>That Speak.</h2>
+        <div class="g-line"></div>
+        <p class="sec-sub" style="margin-bottom:2rem">Every vehicle that enters our studio tells a story. Every vehicle that leaves tells a better one. Drag the slider to see the difference for yourself.</p>
+        <a href="gallery.html" class="btn btn-outline">View Full Gallery</a>
       </div>
-      <div class="gi">
-        <div class="gi-bg">Keramika</div>
-        <div class="gi-over">
-          <div class="gi-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
-          <span class="gi-lbl">Keramička Zaštita</span>
+      <div class="reveal-r">
+        <div class="ba-wrap" style="height:480px">
+          <div class="ba-after"
+            style="background:linear-gradient(145deg,#202020 0%,#2a2a2a 40%,#1e1e1e 100%)">
+            <div class="ba-tag after">After</div>
+          </div>
+          <div class="ba-before">
+            <div class="ba-before-inner"
+              style="background:linear-gradient(145deg,#0a0a0a 0%,#141414 40%,#0c0c0c 100%)">
+            </div>
+            <div class="ba-tag before">Before</div>
+          </div>
+          <div class="ba-handle">
+            <div class="ba-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/>
+              </svg>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="gi">
-        <div class="gi-bg">Enterijer</div>
-        <div class="gi-over">
-          <div class="gi-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
-          <span class="gi-lbl">Detailing Enterijera</span>
-        </div>
-      </div>
-      <div class="gi">
-        <div class="gi-bg">Motor</div>
-        <div class="gi-over">
-          <div class="gi-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
-          <span class="gi-lbl">Motorni Prostor</span>
-        </div>
-      </div>
-      <div class="gi">
-        <div class="gi-bg">Puni Detailing</div>
-        <div class="gi-over">
-          <div class="gi-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
-          <span class="gi-lbl">Premium Paket</span>
-        </div>
-      </div>
-      <div class="gi">
-        <div class="gi-bg">Pre / Posle</div>
-        <div class="gi-over">
-          <div class="gi-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div>
-          <span class="gi-lbl">Obnova Farova</span>
-        </div>
+        <p style="font-size:.72rem;color:var(--w-35);margin-top:.75rem;text-align:center;letter-spacing:.12em;text-transform:uppercase;">
+          Drag slider · Paint Correction + Ceramic Coating
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     PRICING
-============================== -->
-<section class="pricing" id="pricing">
+<!-- WHY CHOOSE US -->
+<section class="why" id="why">
   <div class="container">
-    <div class="sec-head reveal">
-      <span class="label">Paketi</span>
-      <h2 class="section-title">Transparentne Cene</h2>
-      <p class="section-sub" style="margin:0 auto">Bez skrivenih troškova. Bez iznenađenja. Samo izvanredni rezultati po poštenim cenama.</p>
+    <div class="sec-head center reveal">
+      <span class="label">Why Apex</span>
+      <h2 class="sec-title">Engineered For<br>Perfection</h2>
+      <p class="sec-sub">Six reasons why luxury vehicle owners trust us with their most prized possessions.</p>
     </div>
-    <div class="price-grid stagger">
-
-      <div class="price-card">
-        <div class="tier">Osnovni</div>
-        <div class="price-row"><span class="p-sign">€</span><span class="p-val">45</span></div>
-        <p class="p-desc">Savršeno za redovno održavanje i svakodnevni sjaj vašeg automobila.</p>
-        <ul class="p-feats">
-          <li>Ručno pranje i sušenje eksterijera</li>
-          <li>Čišćenje guma i felni</li>
-          <li>Pranje stakala (spolja)</li>
-          <li>Usisavanje enterijera</li>
-          <li>Brisanje table i konzole</li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost btn-full">Rezerviši</a>
+    <div class="why-grid stagger">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-title">Precision Workmanship</div>
+        <p class="why-desc">Each vehicle receives a bespoke treatment plan. No two cars are identical — and neither is our approach to detailing them.</p>
       </div>
-
-      <div class="price-card featured">
-        <div class="badge">Najpopularniji</div>
-        <div class="tier">Premium</div>
-        <div class="price-row"><span class="p-sign">€</span><span class="p-val">139</span></div>
-        <p class="p-desc">Sveobuhvatan detailing koji pokriva svaki centimetar vašeg vozila, iznutra i spolja.</p>
-        <ul class="p-feats">
-          <li>Sve iz Osnovnog paketa</li>
-          <li>Dekontaminacija glinom</li>
-          <li>Jednofazno mašinsko poliranje</li>
-          <li>Nanošenje karnaubskog voska</li>
-          <li>Dubinsko čišćenje i parenje enterijera</li>
-          <li>Nega kože</li>
-        </ul>
-        <a href="#contact" class="btn btn-red btn-full">Rezerviši</a>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-title">Premium Products Only</div>
+        <p class="why-desc">We exclusively use Ceramic Pro, Gyeon Quartz, Koch-Chemie, and Meguiar's Professional — the finest compounds available.</p>
       </div>
-
-      <div class="price-card">
-        <div class="tier">Elitni</div>
-        <div class="price-row"><span class="p-sign">€</span><span class="p-val">279</span></div>
-        <p class="p-desc">Potpuni luksuzni tretman za vlasnike koji zahtevaju apsolutno savršenstvo.</p>
-        <ul class="p-feats">
-          <li>Sve iz Premium paketa</li>
-          <li>Višestepena korekcija laka</li>
-          <li>Keramička zaštita (1 godina)</li>
-          <li>Detailing motornog prostora</li>
-          <li>Obnova farova</li>
-          <li>Potpuna eliminacija mirisa</li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost btn-full">Rezerviši</a>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-title">Exotic Car Experience</div>
+        <p class="why-desc">Ferraris, Lamborghinis, McLarens, Rolls-Royces — we have the expertise and delicacy that exotic vehicles demand.</p>
       </div>
-
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div class="why-title">Trained Professionals</div>
+        <p class="why-desc">Our technicians hold IDA certifications and manufacturer training. Your vehicle is always in the hands of a qualified expert.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <div class="why-title">Safe Wash Methods</div>
+        <p class="why-desc">We use two-bucket method, grit guards, and pH-neutral products — eliminating the swirl marks caused by traditional car washes.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">06</div>
+        <div class="why-title">Guaranteed Satisfaction</div>
+        <p class="why-desc">Every service is backed by our satisfaction guarantee. If it's not perfect, we make it right — no questions, no charge.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     TESTIMONIALS
-============================== -->
+<!-- GALLERY PREVIEW -->
+<section class="gal-prev">
+  <div class="container">
+    <div class="sec-head reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem">
+      <div>
+        <span class="label">Our Work</span>
+        <h2 class="sec-title">The Studio<br>Portfolio</h2>
+      </div>
+      <a href="gallery.html" class="btn btn-ghost" style="flex-shrink:0">View All Work →</a>
+    </div>
+    <div class="gal-prev-grid">
+      <div class="gp-item"><div class="gp-ph">Ceramic Coat</div><div class="gp-ov"><div class="gp-ico"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div></div>
+      <div class="gp-item"><div class="gp-ph">Paint Correction</div><div class="gp-ov"><div class="gp-ico"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div></div>
+      <div class="gp-item"><div class="gp-ph">Interior</div><div class="gp-ov"><div class="gp-ico"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div></div>
+      <div class="gp-item"><div class="gp-ph">Engine Bay</div><div class="gp-ov"><div class="gp-ico"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div></div>
+      <div class="gp-item"><div class="gp-ph">Full Detail</div><div class="gp-ov"><div class="gp-ico"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div></div>
+      <div class="gp-item"><div class="gp-ph">Before / After</div><div class="gp-ov"><div class="gp-ico"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
 <section class="testi">
   <div class="container">
-    <div class="sec-head reveal">
-      <span class="label">Recenzije</span>
-      <h2 class="section-title">Šta Kažu Klijenti</h2>
-      <p class="section-sub" style="margin:0 auto">Preko 500 recenzija sa pet zvezdica od klijenata koji nam poveravaju svoje vozilo.</p>
+    <div class="sec-head center reveal">
+      <span class="label">Client Reviews</span>
+      <h2 class="sec-title">What Our Clients Say</h2>
+      <p class="sec-sub">Over 500 five-star reviews from enthusiasts who trust us with their most prized vehicles.</p>
     </div>
   </div>
-  <div class="track-wrap">
-    <div class="track" id="track">
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Neverovatni rezultati. Moj M4 nikada nije izgledao ovako čisto — čak ni kada sam ga odvezao iz salona. Korekcija laka je vredela svakog dinara."</p><div class="t-author"><div class="avatar">JR</div><div><div class="a-name">Jovan R.</div><div class="a-car">2022 BMW M4 Competition</div></div></div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Rezervisao sam Elitni paket za ženu's Range Rover. Ona je bukvalno zaplakala kada je videla. Ovi momci su umetnici. Nikada neću ići drugde."</p><div class="t-author"><div class="avatar">MT</div><div><div class="a-name">Marko T.</div><div class="a-car">2023 Range Rover Sport</div></div></div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Keramička zaštita je neverovatna — voda se samo sklizne niz auto. Šest meseci kasnije i automobil još uvek izgleda kao sveže detajliran. Sjajno!"</p><div class="t-author"><div class="avatar">SL</div><div><div class="a-name">Stefan L.</div><div class="a-car">2021 Tesla Model S</div></div></div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Doneo sam Porsche prekriven sitnim ogrebotinama. Apex tim je uklonio svaku jednu. Dubina laka nakon korekcije je jednostavno izvanredna."</p><div class="t-author"><div class="avatar">DK</div><div><div class="a-name">Dragan K.</div><div class="a-car">2020 Porsche 911 Carrera S</div></div></div></div>
-      <!-- Duplicate for seamless loop -->
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Neverovatni rezultati. Moj M4 nikada nije izgledao ovako čisto — čak ni kada sam ga odvezao iz salona. Korekcija laka je vredela svakog dinara."</p><div class="t-author"><div class="avatar">JR</div><div><div class="a-name">Jovan R.</div><div class="a-car">2022 BMW M4 Competition</div></div></div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Rezervisao sam Elitni paket za ženu's Range Rover. Ona je bukvalno zaplakala kada je videla. Ovi momci su umetnici. Nikada neću ići drugde."</p><div class="t-author"><div class="avatar">MT</div><div><div class="a-name">Marko T.</div><div class="a-car">2023 Range Rover Sport</div></div></div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Keramička zaštita je neverovatna — voda se samo sklizne niz auto. Šest meseci kasnije i automobil još uvek izgleda kao sveže detajliran. Sjajno!"</p><div class="t-author"><div class="avatar">SL</div><div><div class="a-name">Stefan L.</div><div class="a-car">2021 Tesla Model S</div></div></div></div>
-      <div class="t-card"><div class="stars">★★★★★</div><p class="t-quote">"Doneo sam Porsche prekriven sitnim ogrebotinama. Apex tim je uklonio svaku jednu. Dubina laka nakon korekcije je jednostavno izvanredna."</p><div class="t-author"><div class="avatar">DK</div><div><div class="a-name">Dragan K.</div><div class="a-car">2020 Porsche 911 Carrera S</div></div></div></div>
+  <div class="t-track-wrap">
+    <div class="t-track">
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"Brought in my Ferrari 488 for paint correction and ceramic coating. The transformation was absolutely extraordinary — paint looks like liquid glass. Best money I've ever spent on my car."</p><div class="t-author"><div class="t-av">JM</div><div><div class="t-name">James M.</div><div class="t-car">Ferrari 488 GTB</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"My Lamborghini Huracán had light swirls from a previous detailer. Apex corrected every single one. The attention to detail is unmatched — they treat it like it's their own car."</p><div class="t-author"><div class="t-av">CR</div><div><div class="t-name">Carlos R.</div><div class="t-car">Lamborghini Huracán EVO</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"I've had my Porsche 911 detailed at six different studios. Apex is the only one that truly understood what I was looking for. Precision, professionalism, and perfection."</p><div class="t-author"><div class="t-av">SW</div><div><div class="t-name">Sarah W.</div><div class="t-car">Porsche 911 GT3</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"Ceramic coating on my McLaren 720S. Six months later and water still beads like day one. The team's expertise with exotic vehicles is genuinely world-class."</p><div class="t-author"><div class="t-av">DL</div><div><div class="t-name">David L.</div><div class="t-car">McLaren 720S</div></div></div></div>
+      <!-- duplicate -->
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"Brought in my Ferrari 488 for paint correction and ceramic coating. The transformation was absolutely extraordinary — paint looks like liquid glass. Best money I've ever spent on my car."</p><div class="t-author"><div class="t-av">JM</div><div><div class="t-name">James M.</div><div class="t-car">Ferrari 488 GTB</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"My Lamborghini Huracán had light swirls from a previous detailer. Apex corrected every single one. The attention to detail is unmatched — they treat it like it's their own car."</p><div class="t-author"><div class="t-av">CR</div><div><div class="t-name">Carlos R.</div><div class="t-car">Lamborghini Huracán EVO</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"I've had my Porsche 911 detailed at six different studios. Apex is the only one that truly understood what I was looking for. Precision, professionalism, and perfection."</p><div class="t-author"><div class="t-av">SW</div><div><div class="t-name">Sarah W.</div><div class="t-car">Porsche 911 GT3</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><p class="t-quote">"Ceramic coating on my McLaren 720S. Six months later and water still beads like day one. The team's expertise with exotic vehicles is genuinely world-class."</p><div class="t-author"><div class="t-av">DL</div><div><div class="t-name">David L.</div><div class="t-car">McLaren 720S</div></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     FAQ
-============================== -->
-<section class="faq">
+<!-- PROCESS -->
+<section class="process">
   <div class="container">
-    <div class="sec-head reveal">
-      <span class="label">FAQ</span>
-      <h2 class="section-title">Česta Pitanja</h2>
-      <p class="section-sub" style="margin:0 auto">Sve što treba da znate pre nego što rezervišete termin.</p>
+    <div class="sec-head center reveal">
+      <span class="label">How We Work</span>
+      <h2 class="sec-title">The Apex Process</h2>
+      <p class="sec-sub">Every vehicle goes through a rigorous 5-stage protocol — no shortcuts, no compromises.</p>
     </div>
-    <div class="faq-list reveal">
-
-      <div class="faq-item">
-        <div class="faq-q">Koliko dugo traje potpuni detailing?<div class="faq-icon">+</div></div>
-        <div class="faq-a"><div class="faq-a-inner">Zavisi od paketa i stanja vozila. Osnovni detailing traje 1–2 sata, Premium 3–4 sata, a Elitni detailing sa korekcijom laka može trajati ceo dan (6–8 sati). Uvek ćemo vam dati tačnu procenu vremena pri rezervaciji.</div></div>
+    <div class="proc-grid stagger">
+      <div class="proc-step">
+        <div class="proc-dot">🔍</div>
+        <div class="proc-title">Inspection</div>
+        <p class="proc-desc">Full paint depth analysis, panel assessment, and defect mapping under high-intensity lighting.</p>
       </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Da li nudite mobilni detailing?<div class="faq-icon">+</div></div>
-        <div class="faq-a"><div class="faq-a-inner">Da — nudimo mobilni detailing za Osnovni i Premium paket u radijusu od 25 km od našeg studija. Mobilna usluga zahteva pristup vodi i struji na vašoj lokaciji. Može se naplatiti mala naknada za dolazak zavisno od udaljenosti.</div></div>
+      <div class="proc-step">
+        <div class="proc-dot">🧼</div>
+        <div class="proc-title">Preparation</div>
+        <p class="proc-desc">Safe pre-wash, foam decontamination, iron removal, and clay bar treatment.</p>
       </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Koja je razlika između voskanja i keramičke zaštite?<div class="faq-icon">+</div></div>
-        <div class="faq-a"><div class="faq-a-inner">Vosak je privremena zaštita površine koja traje 1–3 meseca i dodaje sjaj i hidrofobna svojstva. Keramička zaštita je polu-trajna nano-tehnološka zaštita koja se hemijski vezuje za lak, pružajući superiornu odbranu od UV zraka, hemikalija i vode tokom 1–5+ godina.</div></div>
+      <div class="proc-step">
+        <div class="proc-dot">🔬</div>
+        <div class="proc-title">Correction</div>
+        <p class="proc-desc">Multi-stage machine polishing under dual-LED lighting to eliminate all defects.</p>
       </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Kako da pripremim automobil pre dolaska?<div class="faq-icon">+</div></div>
-        <div class="faq-a"><div class="faq-a-inner">Jednostavno uklonite lične predmete iz enterijera i prepustite nam ostatak. Ne morate prethodno prati automobil — zapravo, preferiramo da to ne radite, jer neadekvatno pranje pre naše dekontaminacije može uneti dodatne ogrebotine.</div></div>
+      <div class="proc-step">
+        <div class="proc-dot">💎</div>
+        <div class="proc-title">Protection</div>
+        <p class="proc-desc">Ceramic coating, wax, or PPF application — sealed in a dust-free environment.</p>
       </div>
-
-      <div class="faq-item">
-        <div class="faq-q">Postoji li garancija zadovoljstva?<div class="faq-icon">+</div></div>
-        <div class="faq-a"><div class="faq-a-inner">Apsolutno. Stojimo iza svakog detailinga koji uradimo. Ako niste u potpunosti zadovoljni bilo kojim aspektom našeg rada, kontaktirajte nas u roku od 48 sati od termina i ponovo ćemo to srediti bez naplate. Savršenstvo vašeg automobila je naša reputacija.</div></div>
+      <div class="proc-step">
+        <div class="proc-dot">🚗</div>
+        <div class="proc-title">Delivery</div>
+        <p class="proc-desc">Final quality inspection, walkthrough with the client, and care instruction briefing.</p>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ==============================
-     CONTACT
-============================== -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="sec-head reveal">
-      <span class="label">Rezervišite Detailing</span>
-      <h2 class="section-title">Kontaktirajte Nas</h2>
-      <p class="section-sub" style="margin:0 auto">Spremni ste da doživite Apex razliku? Zatražite rezervaciju ili nas kontaktirajte sa bilo kakvim pitanjima.</p>
-    </div>
-
-    <div class="contact-grid reveal">
-
-      <!-- Info -->
-      <div>
-        <h3 class="info-title">Posetite Naš Studio</h3>
-        <div class="info-items">
-          <div class="info-item">
-            <div class="info-ico">📍</div>
-            <div class="info-text">
-              <strong>Adresa</strong>
-              <span>Bulevar Oslobođenja 48, Lokal 5<br>Beograd, 11000</span>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-ico">📞</div>
-            <div class="info-text">
-              <strong>Telefon</strong>
-              <span>+381 11 555 0184</span>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-ico">✉️</div>
-            <div class="info-text">
-              <strong>Email</strong>
-              <span>zdravo@apexautodetailing.rs</span>
-            </div>
-          </div>
-        </div>
-        <div class="hours">
-          <div class="hours-title">Radno Vreme</div>
-          <div class="hours-row"><span class="hours-day">Ponedeljak – Petak</span><span class="hours-time">08:00 – 18:00</span></div>
-          <div class="hours-row"><span class="hours-day">Subota</span><span class="hours-time">09:00 – 17:00</span></div>
-          <div class="hours-row"><span class="hours-day">Nedelja</span><span class="hours-time">Zatvoreno</span></div>
-        </div>
-      </div>
-
-      <!-- Form -->
-      <div class="form-wrap">
-        <h3 class="form-head">Zatražite Rezervaciju</h3>
-        <p class="form-sub">Popunite formular ispod i potvrdićemo vaš termin u roku od 24 sata.</p>
-        <form id="bookForm" novalidate>
-          <div class="f-row">
-            <div class="f-group"><label for="fname">Ime i Prezime</label><input type="text" id="fname" placeholder="Jovan Petrović" required></div>
-            <div class="f-group"><label for="femail">Email Adresa</label><input type="email" id="femail" placeholder="jovan@email.com" required></div>
-          </div>
-          <div class="f-row">
-            <div class="f-group"><label for="fphone">Broj Telefona</label><input type="tel" id="fphone" placeholder="+381 60 000 0000"></div>
-            <div class="f-group"><label for="fcar">Marka i Model Automobila</label><input type="text" id="fcar" placeholder="2022 BMW M4"></div>
-          </div>
-          <div class="f-row">
-            <div class="f-group">
-              <label for="fservice">Vrsta Usluge</label>
-              <select id="fservice">
-                <option value="">Izaberite uslugu…</option>
-                <option>Osnovni Detailing (€45)</option>
-                <option>Premium Detailing (€139)</option>
-                <option>Elitni Detailing (€279)</option>
-                <option>Korekcija Laka</option>
-                <option>Keramička Zaštita</option>
-                <option>Dubinsko Čišćenje Enterijera</option>
-                <option>Detailing Motornog Prostora</option>
-                <option>Obnova Farova</option>
-              </select>
-            </div>
-            <div class="f-group"><label for="fdate">Željeni Datum</label><input type="date" id="fdate"></div>
-          </div>
-          <div class="f-group"><label for="fmsg">Dodatne Napomene</label><textarea id="fmsg" placeholder="Imate li posebnih zahteva ili pitanja?"></textarea></div>
-          <button type="submit" class="btn btn-red btn-full">Pošaljite Zahtev →</button>
-          <div class="success-msg" id="successMsg">✓ &nbsp;Zahtev za rezervaciju primljen! Potvrdićemo vaš termin u roku od 24 sata.</div>
-        </form>
-      </div>
-
     </div>
   </div>
 </section>
 
-<!-- ==============================
-     FOOTER
-============================== -->
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-glow"></div>
+  <div class="container content">
+    <span class="label" style="justify-content:center">Ready?</span>
+    <h2 class="cta-h2 reveal">Your Vehicle Deserves<span>More Than A Basic Wash.</span></h2>
+    <p class="cta-p reveal">Book your appointment today and experience the Apex standard. Limited availability — we only accept vehicles we can do justice to.</p>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn btn-gold">
+        Book Appointment
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="contact.html" class="btn btn-outline">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="foot-grid">
-
       <div class="foot-brand">
-        <div class="logo" style="font-size:1.7rem">APEX <span>AUTO</span></div>
-        <p>Vodeći studio za detailing automobila u Beogradu. Svako vozilo tretiramo kao da je naše — s preciznošću, strašću i profesionalnom negom.</p>
+        <a href="index.html" class="logo"><div class="logo-main">APEX <span>AUTO</span></div><div class="logo-sub">Detailing Studio</div></a>
+        <p>Los Angeles' premier luxury car detailing studio. We treat every vehicle like a work of art — with precision, passion, and uncompromising attention to detail.</p>
         <div class="socials">
-          <!-- Instagram -->
-          <div class="soc" title="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </div>
-          <!-- Facebook -->
-          <div class="soc" title="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </div>
-          <!-- TikTok -->
-          <div class="soc" title="TikTok">
-            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-          </div>
+          <div class="soc"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+          <div class="soc"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+          <div class="soc"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></div>
         </div>
       </div>
-
       <div>
-        <div class="foot-col-title">Usluge</div>
+        <div class="foot-col-h">Services</div>
         <ul class="foot-links">
-          <li><a href="#services">Pranje i Voskiranje</a></li>
-          <li><a href="#services">Korekcija Laka</a></li>
-          <li><a href="#services">Keramička Zaštita</a></li>
-          <li><a href="#services">Čišćenje Enterijera</a></li>
-          <li><a href="#services">Motorni Prostor</a></li>
-          <li><a href="#services">Obnova Farova</a></li>
+          <li><a href="services.html">Ceramic Coating</a></li>
+          <li><a href="services.html">Paint Correction</a></li>
+          <li><a href="services.html">Full Detail</a></li>
+          <li><a href="services.html">Interior Detailing</a></li>
+          <li><a href="services.html">Exterior Detailing</a></li>
+          <li><a href="services.html">Maintenance Wash</a></li>
         </ul>
       </div>
-
       <div>
-        <div class="foot-col-title">Kompanija</div>
+        <div class="foot-col-h">Studio</div>
         <ul class="foot-links">
-          <li><a href="#about">O Apex Autu</a></li>
-          <li><a href="#gallery">Naš Rad</a></li>
-          <li><a href="#pricing">Cene</a></li>
-          <li><a href="#contact">Kontakt</a></li>
+          <li><a href="about.html">About Apex</a></li>
+          <li><a href="gallery.html">Portfolio</a></li>
+          <li><a href="contact.html">Book Appointment</a></li>
+          <li><a href="contact.html">Get a Quote</a></li>
         </ul>
       </div>
-
       <div>
-        <div class="foot-col-title">Kontakt</div>
+        <div class="foot-col-h">Contact</div>
         <ul class="foot-links">
-          <li><a href="tel:+381115550184">+381 11 555 0184</a></li>
-          <li><a href="mailto:zdravo@apexautodetailing.rs">zdravo@apexautodetailing.rs</a></li>
-          <li><a href="#">Bulevar Oslobođenja 48, Beograd</a></li>
+          <li><a href="tel:+13235550184">(323) 555-0184</a></li>
+          <li><a href="mailto:studio@apexauto.com">studio@apexauto.com</a></li>
+          <li><a href="#">4821 Motor Drive, LA 90015</a></li>
+          <li style="color:var(--w-35);font-size:.82rem;margin-top:.5rem">Mon–Fri: 8am–6pm</li>
+          <li style="color:var(--w-35);font-size:.82rem">Sat: 9am–5pm</li>
         </ul>
       </div>
-
     </div>
-
     <div class="foot-bottom">
-      <p class="foot-copy">© 2024 Apex Auto Detailing. Sva prava zadržana.</p>
+      <p class="foot-copy">© 2024 Apex Auto Detailing. All rights reserved.</p>
       <div class="foot-legal">
-        <a href="#">Politika Privatnosti</a>
-        <a href="#">Uslovi Korišćenja</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ==============================
-     JAVASCRIPT
-============================== -->
-<script>
-  /* --- Nav scroll --- */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  }, { passive: true });
-
-  /* --- Hamburger --- */
-  const burger  = document.getElementById('burger');
-  const mobMenu = document.getElementById('mobMenu');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    mobMenu.classList.toggle('open');
-  });
-  mobMenu.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => {
-      burger.classList.remove('open');
-      mobMenu.classList.remove('open');
-    })
-  );
-
-  /* --- Smooth scroll --- */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (!target) return;
-      e.preventDefault();
-      const offset = nav.offsetHeight;
-      window.scrollTo({ top: target.getBoundingClientRect().top + scrollY - offset, behavior: 'smooth' });
-    });
-  });
-
-  /* --- Intersection Observer: reveal & stagger --- */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -55px 0px' });
-
-  document.querySelectorAll('.reveal, .stagger').forEach(el => io.observe(el));
-
-  /* --- Count-up --- */
-  const countIO = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll('.count').forEach(el => {
-        const end = +el.dataset.target;
-        const dur = 1800;
-        const t0  = performance.now();
-        const ease = t => 1 - Math.pow(1 - t, 3);
-        (function tick(now) {
-          const p = Math.min((now - t0) / dur, 1);
-          el.textContent = Math.floor(ease(p) * end);
-          if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = end;
-        })(t0);
-      });
-      countIO.unobserve(entry.target);
-    });
-  }, { threshold: 0.5 });
-  const statsEl = document.querySelector('.stats');
-  if (statsEl) countIO.observe(statsEl);
-
-  /* --- FAQ accordion --- */
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => {
-      const item   = q.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    });
-  });
-
-  /* --- Booking form --- */
-  document.getElementById('bookForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('[type="submit"]');
-    btn.textContent = 'Slanje…';
-    btn.disabled = true;
-    setTimeout(() => {
-      document.getElementById('successMsg').classList.add('show');
-      this.reset();
-      btn.textContent = 'Pošaljite Zahtev →';
-      btn.disabled = false;
-      setTimeout(() => document.getElementById('successMsg').classList.remove('show'), 6000);
-    }, 1100);
-  });
-
-  /* --- Hero particles --- */
-  (function() {
-    const wrap = document.getElementById('pts');
-    for (let i = 0; i < 20; i++) {
-      const d = document.createElement('div');
-      d.className = 'p-dot';
-      const sz = Math.random() * 2.5 + 1;
-      d.style.cssText = `
-        left:${Math.random()*100}%;
-        width:${sz}px; height:${sz}px;
-        animation-duration:${Math.random()*14+9}s;
-        animation-delay:${Math.random()*16}s;
-        --dx:${(Math.random()-.5)*90}px;
-      `;
-      wrap.appendChild(d);
-    }
-  })();
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
